@@ -1,0 +1,67 @@
+[gd_scene load_steps=4 format=3 uid="uid://ddrp26r2k5vqq"]
+
+[ext_resource type="ButtonGroup" uid="uid://ddh3myfjo0esy" path="res://Other/ItemSceneBtnGroup.tres" id="1_5v1ga"]
+[ext_resource type="StyleBox" uid="uid://cm3vnitjlvddu" path="res://Other/ItemSceneNormalStylebox.tres" id="1_diko6"]
+[ext_resource type="Script" path="res://Scripts/ItemScene.gd" id="1_eaj75"]
+
+[node name="ItemScene" type="PanelContainer"]
+custom_minimum_size = Vector2(200, 90)
+offset_right = 200.0
+offset_bottom = 90.0
+size_flags_horizontal = 3
+mouse_filter = 2
+mouse_default_cursor_shape = 2
+theme_override_styles/panel = ExtResource("1_diko6")
+script = ExtResource("1_eaj75")
+
+[node name="Button" type="Button" parent="."]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+mouse_default_cursor_shape = 2
+toggle_mode = true
+button_group = ExtResource("1_5v1ga")
+shortcut_feedback = false
+shortcut_in_tooltip = false
+
+[node name="Container" type="VBoxContainer" parent="Button"]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -42.5
+offset_bottom = 42.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Title" type="Label" parent="Button/Container"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+text = "  Title"
+vertical_alignment = 1
+
+[node name="Separator" type="ColorRect" parent="Button/Container"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(194, 3)
+layout_mode = 2
+mouse_filter = 2
+color = Color(0.196078, 0.196078, 0.196078, 1)
+
+[node name="Value" type="Label" parent="Button/Container"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 51)
+layout_mode = 2
+size_flags_vertical = 3
+vertical_alignment = 1
+clip_text = true
+text_overrun_behavior = 3
+
+[node name="PressedTimer" type="Timer" parent="."]
+unique_name_in_owner = true
+wait_time = 0.12
+one_shot = true
+
+[connection signal="gui_input" from="Button" to="." method="pressed"]
+[connection signal="mouse_entered" from="Button" to="." method="set_panel" binds= [1]]
+[connection signal="mouse_exited" from="Button" to="." method="set_panel" binds= [0]]

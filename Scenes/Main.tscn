@@ -1,0 +1,930 @@
+[gd_scene load_steps=25 format=3 uid="uid://bam4ff3h0tn3h"]
+
+[ext_resource type="Script" path="res://Scripts/Main.gd" id="1_6hid6"]
+[ext_resource type="Texture2D" uid="uid://hq5848tbf2fa" path="res://Assets/SoftwareLogoCircle_1.png" id="1_sw0tc"]
+[ext_resource type="Texture2D" uid="uid://eyopq06g7dre" path="res://Assets/MinimizeIcon.png" id="2_2dwtu"]
+[ext_resource type="Texture2D" uid="uid://b3g2gm1bs7nyp" path="res://Assets/MinimizeIcon_Pressed.png" id="3_yoeou"]
+[ext_resource type="Texture2D" uid="uid://b25urxfxf6117" path="res://Assets/MinimizeIcon_Hovered.png" id="4_v2mnq"]
+[ext_resource type="Texture2D" uid="uid://g0oa8casnhq1" path="res://Assets/WindowIcon.png" id="5_e2bl4"]
+[ext_resource type="Texture2D" uid="uid://dvvms4mtgdrd6" path="res://Assets/WindowIcon_Pressed.png" id="6_808y1"]
+[ext_resource type="Texture2D" uid="uid://bnrrvifr0lqbq" path="res://Assets/WindowIcon_Hovered.png" id="7_1060q"]
+[ext_resource type="Texture2D" uid="uid://h6jmxplpaaoo" path="res://Assets/QuitIcon.png" id="8_n7tuo"]
+[ext_resource type="Texture2D" uid="uid://bpsu46emcej1p" path="res://Assets/QuitIcon_Pressed.png" id="9_bdp7q"]
+[ext_resource type="Texture2D" uid="uid://cmfl8j461s3sd" path="res://Assets/QuitIcon_Hovered.png" id="10_4hxvp"]
+[ext_resource type="PackedScene" uid="uid://dd4na1exlprsc" path="res://Scenes/PageSelector.tscn" id="12_6yc3s"]
+[ext_resource type="StyleBox" uid="uid://jvc6ydncn2dh" path="res://Other/AppBodyPanelStylebox.tres" id="13_1vkr5"]
+[ext_resource type="PackedScene" uid="uid://bsncq4qay0aqo" path="res://Scenes/SearchElement.tscn" id="13_3ebvp"]
+[ext_resource type="PackedScene" uid="uid://c142jjsiisug6" path="res://Scenes/InfoPanel.tscn" id="14_tr1xh"]
+[ext_resource type="PackedScene" uid="uid://swr8nsy32e14" path="res://Scenes/PageContent.tscn" id="15_ys48v"]
+[ext_resource type="PackedScene" uid="uid://buy2fhx7cw5wv" path="res://Scenes/DataDecryptionPopup.tscn" id="17_hbhgp"]
+
+[sub_resource type="ButtonGroup" id="ButtonGroup_mi0el"]
+
+[sub_resource type="ButtonGroup" id="ButtonGroup_fjvtb"]
+allow_unpress = true
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_epeum"]
+bg_color = Color(0.0588235, 0.0588235, 0.0588235, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.196078, 0.196078, 0.196078, 1)
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+
+[sub_resource type="ButtonGroup" id="ButtonGroup_rto06"]
+
+[sub_resource type="Animation" id="Animation_cs1ou"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_ar5tu"]
+resource_name = "fadeout"
+length = 0.25
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.233333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_kctgn"]
+_data = {
+"RESET": SubResource("Animation_cs1ou"),
+"fadeout": SubResource("Animation_ar5tu")
+}
+
+[node name="Main" type="Control"]
+custom_minimum_size = Vector2(1920, 1080)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_6hid6")
+
+[node name="Camera" type="Camera2D" parent="."]
+anchor_mode = 0
+zoom = Vector2(0.6, 0.6)
+
+[node name="ScreenContainer" type="AspectRatioContainer" parent="Camera"]
+custom_minimum_size = Vector2(1920, 1080)
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Background" type="ColorRect" parent="Camera/ScreenContainer"]
+custom_minimum_size = Vector2(1920, 0)
+layout_mode = 2
+color = Color(0.0588235, 0.0588235, 0.0588235, 1)
+
+[node name="MasterContainer" type="VBoxContainer" parent="Camera/ScreenContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(1920, 0)
+layout_mode = 2
+theme_override_constants/separation = -1
+
+[node name="HatBar" type="HBoxContainer" parent="Camera/ScreenContainer/MasterContainer"]
+layout_mode = 2
+
+[node name="AppLogo" type="TextureRect" parent="Camera/ScreenContainer/MasterContainer/HatBar"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+texture = ExtResource("1_sw0tc")
+stretch_mode = 5
+
+[node name="AppTitle" type="Label" parent="Camera/ScreenContainer/MasterContainer/HatBar"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Nat Password Software"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="AppVersion" type="Label" parent="Camera/ScreenContainer/MasterContainer/HatBar"]
+layout_mode = 2
+text = "v1"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Void" type="Panel" parent="Camera/ScreenContainer/MasterContainer/HatBar"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="MinimizeBtn" type="TextureButton" parent="Camera/ScreenContainer/MasterContainer/HatBar"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+shortcut_feedback = false
+shortcut_in_tooltip = false
+texture_normal = ExtResource("2_2dwtu")
+texture_pressed = ExtResource("3_yoeou")
+texture_hover = ExtResource("4_v2mnq")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="WindowBtn" type="TextureButton" parent="Camera/ScreenContainer/MasterContainer/HatBar"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+shortcut_feedback = false
+shortcut_in_tooltip = false
+texture_normal = ExtResource("5_e2bl4")
+texture_pressed = ExtResource("6_808y1")
+texture_hover = ExtResource("7_1060q")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="QuitBtn" type="TextureButton" parent="Camera/ScreenContainer/MasterContainer/HatBar"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+shortcut_feedback = false
+shortcut_in_tooltip = false
+texture_normal = ExtResource("8_n7tuo")
+texture_pressed = ExtResource("9_bdp7q")
+texture_hover = ExtResource("10_4hxvp")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="Separator" type="ColorRect" parent="Camera/ScreenContainer/MasterContainer"]
+custom_minimum_size = Vector2(0, 3)
+layout_mode = 2
+color = Color(0.196078, 0.196078, 0.196078, 1)
+
+[node name="TabBar" parent="Camera/ScreenContainer/MasterContainer" instance=ExtResource("12_6yc3s")]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+size_flags_vertical = 1
+button_group = SubResource("ButtonGroup_mi0el")
+is_self_visible = 1
+type = 1
+buttons = Array[String](["Passwords", "Tags", "App Settings", "Help"])
+
+[node name="Separator2" type="ColorRect" parent="Camera/ScreenContainer/MasterContainer"]
+custom_minimum_size = Vector2(0, 3)
+layout_mode = 2
+color = Color(0.196078, 0.196078, 0.196078, 1)
+
+[node name="AppBody" type="Control" parent="Camera/ScreenContainer/MasterContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Passwords" type="Control" parent="Camera/ScreenContainer/MasterContainer/AppBody"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="PanelContainer" parent="Camera/ScreenContainer/MasterContainer/AppBody/Passwords"]
+custom_minimum_size = Vector2(1820, 843)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -910.0
+offset_top = -421.5
+offset_right = 910.0
+offset_bottom = 421.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = ExtResource("13_1vkr5")
+
+[node name="Container" type="HBoxContainer" parent="Camera/ScreenContainer/MasterContainer/AppBody/Passwords/Panel"]
+layout_mode = 2
+theme_override_constants/separation = 35
+
+[node name="SearchElement" parent="Camera/ScreenContainer/MasterContainer/AppBody/Passwords/Panel/Container" instance=ExtResource("13_3ebvp")]
+layout_mode = 2
+add_entry_title = "New Password Entry"
+add_entry_id = -1
+
+[node name="InfoPanel" parent="Camera/ScreenContainer/MasterContainer/AppBody/Passwords/Panel/Container" instance=ExtResource("14_tr1xh")]
+layout_mode = 2
+
+[node name="Tags" type="Control" parent="Camera/ScreenContainer/MasterContainer/AppBody"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="PanelContainer" parent="Camera/ScreenContainer/MasterContainer/AppBody/Tags"]
+custom_minimum_size = Vector2(1820, 843)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -910.0
+offset_top = -421.5
+offset_right = 910.0
+offset_bottom = 421.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = ExtResource("13_1vkr5")
+
+[node name="Container" type="HBoxContainer" parent="Camera/ScreenContainer/MasterContainer/AppBody/Tags/Panel"]
+layout_mode = 2
+theme_override_constants/separation = 35
+
+[node name="SearchElement" parent="Camera/ScreenContainer/MasterContainer/AppBody/Tags/Panel/Container" instance=ExtResource("13_3ebvp")]
+layout_mode = 2
+add_entry_title = "Create New Tag"
+add_entry_id = -1
+type = 1
+
+[node name="InfoPanel" parent="Camera/ScreenContainer/MasterContainer/AppBody/Tags/Panel/Container" instance=ExtResource("14_tr1xh")]
+layout_mode = 2
+type = 1
+
+[node name="AppSettings" type="Control" parent="Camera/ScreenContainer/MasterContainer/AppBody"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+
+[node name="Container" type="PanelContainer" parent="Camera/ScreenContainer/MasterContainer/AppBody/AppSettings"]
+custom_minimum_size = Vector2(1820, 843)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -910.0
+offset_top = -421.5
+offset_right = 910.0
+offset_bottom = 421.5
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+theme_override_styles/panel = ExtResource("13_1vkr5")
+
+[node name="Container" type="HBoxContainer" parent="Camera/ScreenContainer/MasterContainer/AppBody/AppSettings/Container"]
+layout_mode = 2
+theme_override_constants/separation = 35
+
+[node name="PageSelector" parent="Camera/ScreenContainer/MasterContainer/AppBody/AppSettings/Container/Container" instance=ExtResource("12_6yc3s")]
+custom_minimum_size = Vector2(275, 0)
+layout_mode = 2
+button_group = SubResource("ButtonGroup_fjvtb")
+selector_id = 1
+buttons = Array[String](["General", "Data", "Search"])
+
+[node name="PageDisplay" type="PanelContainer" parent="Camera/ScreenContainer/MasterContainer/AppBody/AppSettings/Container/Container"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 1
+theme_override_styles/panel = SubResource("StyleBoxFlat_epeum")
+
+[node name="General" type="VBoxContainer" parent="Camera/ScreenContainer/MasterContainer/AppBody/AppSettings/Container/Container/PageDisplay"]
+layout_mode = 2
+theme_override_constants/separation = 15
+
+[node name="PageContent" parent="Camera/ScreenContainer/MasterContainer/AppBody/AppSettings/Container/Container/PageDisplay/General" instance=ExtResource("15_ys48v")]
+layout_mode = 2
+mouse_filter = 0
+title = "General"
+buttons = 2
+buttons_text = Array[String](["", ""])
+button_types = Array[int]([1, 1])
+option_texts = Array[String](["FPS Capped", "Frame Efficiency"])
+text_tooltips = Array[String](["If enabled; FPS is capped at 30, otherwise FPS is unlimited.", "If enabled; When drawing a new frame, if the prior frame is identical to the new frame, don't draw a new frame to the screen, helping save on computor resources."])
+tooltip_widths = Array[int]([350, 550])
+normal_button_uses_tooltips = Array[bool]([false, false])
+textboxs_use_tooltips = Array[bool]([false, false])
+normal_buttons_are_toggles = Array[bool]([false, false])
+spinbox_ranges = Array[Vector2i]([Vector2i(0, 0), Vector2i(0, 0)])
+button_groups = Array[ButtonGroup]([null, null])
+requires_confirmation = Array[bool]([false, false])
+
+[node name="PageContent2" parent="Camera/ScreenContainer/MasterContainer/AppBody/AppSettings/Container/Container/PageDisplay/General" instance=ExtResource("15_ys48v")]
+layout_mode = 2
+content_id = 1
+title = "Alphabet"
+body_text = "This is the alphabet used by the programme when generating new passwords, see Help > Passwords > Password Generation for more information."
+buttons = 4
+buttons_text = Array[String](["", "", "", ""])
+button_types = Array[int]([4, 4, 4, 4])
+option_texts = Array[String](["Special Charcaters", "UpperCase Characters", "LowerCase Characters", "Number Characters"])
+text_tooltips = Array[String](["The characters considered 'Special' in the programmes Alphabet.", "The characters considered 'UpperCase' in the programmes Alphabet.", "The characters considered 'LowerCase' in the programmes Alphabet.", "The characters considered as a 'Number' in the programmes Alphabet."])
+tooltip_widths = Array[int]([500, 500, 500, 500])
+normal_button_uses_tooltips = Array[bool]([false, false, false, false])
+textboxs_use_tooltips = Array[bool]([false, false, false, false])
+normal_buttons_are_toggles = Array[bool]([false, false, false, false])
+spinbox_ranges = Array[Vector2i]([Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0)])
+button_groups = Array[ButtonGroup]([null, null, null, null])
+requires_confirmation = Array[bool]([false, false, false, false])
+
+[node name="Data" type="VBoxContainer" parent="Camera/ScreenContainer/MasterContainer/AppBody/AppSettings/Container/Container/PageDisplay"]
+visible = false
+layout_mode = 2
+theme_override_constants/separation = 15
+
+[node name="PageContent" parent="Camera/ScreenContainer/MasterContainer/AppBody/AppSettings/Container/Container/PageDisplay/Data" instance=ExtResource("15_ys48v")]
+layout_mode = 2
+mouse_filter = 0
+title = "Data"
+body_text = "For information and control over the deletion of your data, please see the Help > Data page."
+buttons = 4
+buttons_text = Array[String](["", "", "", ""])
+button_types = Array[int]([1, 3, 1, 3])
+option_texts = Array[String](["Autosave", "Autosave Interval", "Automatic Backups", "Automatic Backup Interval"])
+text_tooltips = Array[String](["If enabled; the app will save your data according to the time stated below.", "If Autosave is enabled; every N amount of minutes, where N is equal to the value this value is set to, the programme will autosave.", "If enabled; when opening the app and the time since the app was last opened is greater than or equal to the Automatic Backup Interval, prompts you if you want to make a backup of your data.", "If Automatic Backup is enbled; will prompt you if you want to backup your data upon oppening the app if the time you last opened the app is N many days away, N being the value of this setting."])
+tooltip_widths = Array[int]([500, 500, 500, 750])
+normal_button_uses_tooltips = Array[bool]([false, false, false, false])
+textboxs_use_tooltips = Array[bool]([false, false, false, false])
+normal_buttons_are_toggles = Array[bool]([false, false, false, false])
+spinbox_ranges = Array[Vector2i]([Vector2i(0, 0), Vector2i(1, 60), Vector2i(0, 0), Vector2i(1, 365)])
+button_groups = Array[ButtonGroup]([null, null, null, null])
+requires_confirmation = Array[bool]([false, false, false, false])
+
+[node name="PageContent2" parent="Camera/ScreenContainer/MasterContainer/AppBody/AppSettings/Container/Container/PageDisplay/Data" instance=ExtResource("15_ys48v")]
+layout_mode = 2
+content_id = 1
+title = "Encryption"
+body_text = "!WARNING!
+Please read the Help > Data > Encryption page before altering any of these settings, as mismanagment of these values could result in loss if your data. Altering any of these settings will also save your data after being set."
+buttons = 2
+buttons_text = Array[String](["", ""])
+button_types = Array[int]([1, 3])
+option_texts = Array[String](["Data Encryption", "Data Encryption Key"])
+text_tooltips = Array[String](["If enabled; When saving your data, the data will be encrypted. !WARNING! When this is enabled the key isn't saved, so you must remeber it everytime you log into the app, see the Help > Data > Encryption page for more details.", "If Data Encryption is enabled; uses this key when encrypting your data, you will have to remember this key to access your data in the future, as it isn't stored. The key must be 4 digits long with only characters ranged 1-9."])
+tooltip_widths = Array[int]([500, 500])
+normal_button_uses_tooltips = Array[bool]([false, false])
+textboxs_use_tooltips = Array[bool]([false, false])
+normal_buttons_are_toggles = Array[bool]([false, false])
+spinbox_ranges = Array[Vector2i]([Vector2i(0, 0), Vector2i(-1, 9999)])
+button_groups = Array[ButtonGroup]([null, null])
+requires_confirmation = Array[bool]([false, true])
+
+[node name="Search" type="VBoxContainer" parent="Camera/ScreenContainer/MasterContainer/AppBody/AppSettings/Container/Container/PageDisplay"]
+layout_mode = 2
+theme_override_constants/separation = 15
+
+[node name="PageContent" parent="Camera/ScreenContainer/MasterContainer/AppBody/AppSettings/Container/Container/PageDisplay/Search" instance=ExtResource("15_ys48v")]
+layout_mode = 2
+title = "Search Settings"
+buttons = 2
+buttons_text = Array[String](["", ""])
+button_types = Array[int]([1, 1])
+option_texts = Array[String](["Case-Sensative Search", "Strict Search"])
+text_tooltips = Array[String](["If enabled; When searching, the characters case's must match.", "If enabled; when searching only items with a name exactly equal to the query will be included, otherwise if the query is inside the item name it is included. Disabling this may impact performance when searching through large amounts of data."])
+tooltip_widths = Array[int]([375, 500])
+normal_button_uses_tooltips = Array[bool]([false, false])
+textboxs_use_tooltips = Array[bool]([false, false])
+normal_buttons_are_toggles = Array[bool]([false, false])
+spinbox_ranges = Array[Vector2i]([Vector2i(0, 0), Vector2i(0, 0)])
+button_groups = Array[ButtonGroup]([null, null])
+requires_confirmation = Array[bool]([false, false])
+
+[node name="Help" type="Control" parent="Camera/ScreenContainer/MasterContainer/AppBody"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Container" type="PanelContainer" parent="Camera/ScreenContainer/MasterContainer/AppBody/Help"]
+custom_minimum_size = Vector2(1820, 843)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -910.0
+offset_top = -421.5
+offset_right = 910.0
+offset_bottom = 421.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = ExtResource("13_1vkr5")
+
+[node name="Container" type="HBoxContainer" parent="Camera/ScreenContainer/MasterContainer/AppBody/Help/Container"]
+layout_mode = 2
+theme_override_constants/separation = 35
+
+[node name="PageSelector" parent="Camera/ScreenContainer/MasterContainer/AppBody/Help/Container/Container" instance=ExtResource("12_6yc3s")]
+custom_minimum_size = Vector2(275, 0)
+layout_mode = 2
+button_group = SubResource("ButtonGroup_rto06")
+selector_id = 2
+buttons = Array[String](["Passwords", "Tags", "Data", "App", "Search", "Developer"])
+
+[node name="PageDisplay" type="PanelContainer" parent="Camera/ScreenContainer/MasterContainer/AppBody/Help/Container/Container"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 1
+theme_override_styles/panel = SubResource("StyleBoxFlat_epeum")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Camera/ScreenContainer/MasterContainer/AppBody/Help/Container/Container/PageDisplay"]
+layout_mode = 2
+follow_focus = true
+scroll_vertical_custom_step = 1.0
+horizontal_scroll_mode = 0
+scroll_deadzone = 1
+
+[node name="PageContainer" type="VBoxContainer" parent="Camera/ScreenContainer/MasterContainer/AppBody/Help/Container/Container/PageDisplay/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Passwords" type="VBoxContainer" parent="Camera/ScreenContainer/MasterContainer/AppBody/Help/Container/Container/PageDisplay/ScrollContainer/PageContainer"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 15
+
+[node name="PageContent" parent="Camera/ScreenContainer/MasterContainer/AppBody/Help/Container/Container/PageDisplay/ScrollContainer/PageContainer/Passwords" instance=ExtResource("15_ys48v")]
+layout_mode = 2
+title = "Name"
+body_text = "You can edit the Name of an entry by going onto the Name row (Row 1) and hitting the 'Edit' icon on the end of the row, this will allow you to edit the text on that row to your new desired name. After you are done changing the name you can hit the 'Save' icon where the 'Edit' icon once was, and this will save your new name to this entry."
+
+[node name="PageContent2" parent="Camera/ScreenContainer/MasterContainer/AppBody/Help/Container/Container/PageDisplay/ScrollContainer/PageContainer/Passwords" instance=ExtResource("15_ys48v")]
+layout_mode = 2
+title = "Login"
+body_text = "You can edit the Login of an entry by going onto the Login row (Row 2) and hitting the 'Edit' icon on the end of the row, this will allow you to edit the text on that row to your new desired login credentials. After you are done changing the info you can hit the 'Save' icon where the 'Edit' icon once was, and this will save your new login info to this entry. If you wish to search by login in the future, inside the passwords tab you can prefix your search query with '&' to search by login info."
+
+[node name="PageContent3" parent="Camera/ScreenContainer/MasterContainer/AppBody/Help/Container/Container/PageDisplay/ScrollContainer/PageContainer/Passwords" instance=ExtResource("15_ys48v")]
+layout_mode = 2
+title = "Password"
+body_text = "You can edit the Password of an entry by going onto the Password row (Row 3) and hitting the 'Edit' icon on the end of the row, this will reveal a new panel inbetween the Password row and the Tag list below it, allowing you to generate a new password or set it manually. For more information on password generation, see the section below. After you have finished either generating a new password or setting one yourself, you can hit the 'Save' icon on the Password row when the 'Edit' icon used to be, afterwards whatever was in the 'New Password Field' in the dropdown panel will be saved as your new password."
+
+[node name="PageContent4" parent="Camera/ScreenContainer/MasterContainer/AppBody/Help/Container/Container/PageDisplay/ScrollContainer/PageContainer/Passwords" instance=ExtResource("15_ys48v")]
+layout_mode = 2
+title = "Password Generation"
+body_text = "When begining to edit your password, a new panel will apear inbetween the Password row and the Tags list. Inside this panel are 7 things:
+
+New Password Field; The area where your current password is, when you hit the 'Generate Password' button below, that password will be here. Or you can edit this manually to whatever you want.
+Generate Password; According to the paramaters set below, generates you a new password using the programmes Alphabet, look to the end of this paragraph for info on the programmes Alphabet.
+Password Length; The length of your newly generated password, this has a minimum value of One + One for every toggle turned on below. This has a maximum of 100.
+Atleast 1 Special Character; If enabled, this will ensure your generated password contains atleast 1 Special character.
+Atleast 1 UpperCase Character; If enabled, this will ensure your generated password contains atleast 1 UpperCase (Capital) character.
+Atleast 1 LowerCase Character; If enabled, this will ensure your generated password contains atleast 1 LowerCase character.
+Atleast 1 Number Character; If enabled, this will ensure your generated password contains atleast 1 Number character.
+
+When generating a new password, it will use an Alphabet defined inside the 'General' section of the App Settings, there is where you can define the list of 'Special', 'UpperCase', 'LowerCase' and 'Number' characters, "
+
+[node name="Tags" type="VBoxContainer" parent="Camera/ScreenContainer/MasterContainer/AppBody/Help/Container/Container/PageDisplay/ScrollContainer/PageContainer"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 15
+
+[node name="PageContent" parent="Camera/ScreenContainer/MasterContainer/AppBody/Help/Container/Container/PageDisplay/ScrollContainer/PageContainer/Tags" instance=ExtResource("15_ys48v")]
+layout_mode = 2
+title = "Name"
+body_text = "You can edit the Name of an entry by going onto the Name row (Row 1) and hitting the 'Edit' icon on the end of the row, this will allow you to edit the text on that row to your new desired name. After you are done changing the name you can hit the 'Save' icon where the 'Edit' icon once was, and this will save your new name to this entry."
+
+[node name="PageContent2" parent="Camera/ScreenContainer/MasterContainer/AppBody/Help/Container/Container/PageDisplay/ScrollContainer/PageContainer/Tags" instance=ExtResource("15_ys48v")]
+layout_mode = 2
+title = "Tags"
+body_text = "After a Tag has been created, you can then - either by pressing the 'Attach To An Entry' button in the Tag's menu, or by going into the desired Passwords entry and pressing the 'Add New Tag' button - attach it to a password entry, this can be used to better organize and search through your passwords later. 
+
+You can search for Tags inside the Tag menu by searching for it by name, or search through them by prefixing your search query with '#' to search by the password entries that use that Tag. Or you can search for them in the Password menu by prefixing your search query with '#'."
+
+[node name="Data" type="VBoxContainer" parent="Camera/ScreenContainer/MasterContainer/AppBody/Help/Container/Container/PageDisplay/ScrollContainer/PageContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 15
+
+[node name="PageContent" parent="Camera/ScreenContainer/MasterContainer/AppBody/Help/Container/Container/PageDisplay/ScrollContainer/PageContainer/Data" instance=ExtResource("15_ys48v")]
+layout_mode = 2
+title = "Data Managment"
+body_text = "Your data is never download ro upload over the internet, the data accessed by the programme is only used by the programme. For trust and transparency your data is available to be modified and deleted at any time, please reference the points below on how to manage your data.
+
+To manage your Password data, please see the 'Password Data' tab below, for Tag data, reference the 'Tag Data' section, and finally for User data, please reference the 'User Data' section, this sections funcionality is for all the categories of data mentioned.
+
+To delete all of your data used by the app; be warned this will not erase the data in-memory, so if you delete your data and don't wish to save it again, make sure to hit 'No' when prompted to save before exiting the programme. If you wish to delete your data, please hit the 'Delete Data' button below.
+
+To save your data, please hit the 'Save Data' button below, this saves your data into a folder called 'NPS_Data', inside of which is three files, 'PasswordData.ini' containing your Password data, 'TagData.ini' containing your Tag data, and lastly 'UserData.ini', containing your User data - settings, app usage data, etc.
+
+To backup your data; be warned this will save your data before creating a backup, see the Save Data section above. After saving your data it will create a copy into a folder called 'NPS_Data_Copy_' followed by the date in the style of DAY:MONTH:YEAR according to your systems clock at the time of saving.
+
+If you wish to see more info on which information is contained in each category, see the sections below for the appropriate data type."
+buttons = 3
+buttons_text = Array[String](["Delete Data", "Save Data", "Backup Data"])
+button_types = Array[int]([0, 0, 0])
+option_texts = Array[String](["", "", ""])
+text_tooltips = Array[String](["Deletes all your saved data; be warned this will not delete the data used in-memory.", "Saves your data into the 'NPS_Data' folder held in the same place as this programmes executable.", "Saves your data before creating a copy into the folder 'NPS_Data_Copy_' followed by the date in DAY:MONTH:YEAR where this programmes executable is held."])
+tooltip_widths = Array[int]([500, 500, 500])
+normal_button_uses_tooltips = Array[bool]([true, true, true])
+textboxs_use_tooltips = Array[bool]([false, false, false])
+normal_buttons_are_toggles = Array[bool]([false, false, false])
+spinbox_ranges = Array[Vector2i]([Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0)])
+button_groups = Array[ButtonGroup]([null, null, null])
+requires_confirmation = Array[bool]([false, false, false])
+
+[node name="PageContent2" parent="Camera/ScreenContainer/MasterContainer/AppBody/Help/Container/Container/PageDisplay/ScrollContainer/PageContainer/Data" instance=ExtResource("15_ys48v")]
+layout_mode = 2
+content_id = 1
+title = "Password Data"
+body_text = "Your Password data is all of the data referring to your password entried, including their Names, Logins, Passwords and their associated Tags. This action is permanant, and if you wish to create a backup of your data prior to deletion, please see the section at the top of this page."
+buttons = 1
+buttons_text = Array[String](["Delete Password Data"])
+button_types = Array[int]([0])
+option_texts = Array[String]([""])
+text_tooltips = Array[String](["Deletes your saved Password data, this action is permanent."])
+tooltip_widths = Array[int]([550])
+normal_button_uses_tooltips = Array[bool]([true])
+textboxs_use_tooltips = Array[bool]([false])
+normal_buttons_are_toggles = Array[bool]([false])
+spinbox_ranges = Array[Vector2i]([Vector2i(0, 0)])
+button_groups = Array[ButtonGroup]([null])
+requires_confirmation = Array[bool]([false])
+
+[node name="PageContent3" parent="Camera/ScreenContainer/MasterContainer/AppBody/Help/Container/Container/PageDisplay/ScrollContainer/PageContainer/Data" instance=ExtResource("15_ys48v")]
+layout_mode = 2
+content_id = 2
+title = "Tag Data"
+body_text = "Your Tag data is all of the data referring to your tag entries, including their Names and their associated Passwords. This action is permanant, and if you wish to create a backup of your data prior to deletion, please see the section at the top of this page."
+buttons = 1
+buttons_text = Array[String](["Delete Tag Data"])
+button_types = Array[int]([0])
+option_texts = Array[String]([""])
+text_tooltips = Array[String](["Deletes your saved Tag data, this action is permanent."])
+tooltip_widths = Array[int]([500])
+normal_button_uses_tooltips = Array[bool]([true])
+textboxs_use_tooltips = Array[bool]([false])
+normal_buttons_are_toggles = Array[bool]([false])
+spinbox_ranges = Array[Vector2i]([Vector2i(0, 0)])
+button_groups = Array[ButtonGroup]([null])
+requires_confirmation = Array[bool]([false])
+
+[node name="PageContent4" parent="Camera/ScreenContainer/MasterContainer/AppBody/Help/Container/Container/PageDisplay/ScrollContainer/PageContainer/Data" instance=ExtResource("15_ys48v")]
+layout_mode = 2
+content_id = 3
+title = "User Data"
+body_text = "Your User data is all of the data referring to the programmes configuration, including Settings, Programme Usage Information and Alphabet. This action is permanant, and if you wish to create a backup of your data prior to deletion, please see the section at the top of this page."
+buttons = 1
+buttons_text = Array[String](["Delete User Data"])
+button_types = Array[int]([0])
+option_texts = Array[String]([""])
+text_tooltips = Array[String](["Deletes your saved User data, this action is permanent."])
+tooltip_widths = Array[int]([500])
+normal_button_uses_tooltips = Array[bool]([true])
+textboxs_use_tooltips = Array[bool]([false])
+normal_buttons_are_toggles = Array[bool]([false])
+spinbox_ranges = Array[Vector2i]([Vector2i(0, 0)])
+button_groups = Array[ButtonGroup]([null])
+requires_confirmation = Array[bool]([false])
+
+[node name="PageContent5" parent="Camera/ScreenContainer/MasterContainer/AppBody/Help/Container/Container/PageDisplay/ScrollContainer/PageContainer/Data" instance=ExtResource("15_ys48v")]
+layout_mode = 2
+content_id = 4
+title = "Encryption"
+body_text = "Inside App Settings > Data is an option to enable encryption for your saved data, this will cause your written Password and Tag data to be ran through the apps built-in encryption algorithm before being saved, this is done using a key set in the app settings. If the app detects encryption to be enabled when opening then it will prompt you with the key you wish to use to decrypt your data.
+
+This key you provide when prompted on login must be the exact same as the one you set when you encrypted the data, otherwise your data will be unrecoverable until you provide the correct key. So it is critical to remember the key used when trying to open the app again, if the app still detects the data as encrypted after using the provided key, it will tell the user the prompt was invalid, before giving them a button to quit the programme or to try again - after 3 failed attempts the app will close itself.
+
+Enabling encryption for your active data will not encrypt future backups. If you enable encryption;  it is reccomend to keep a backup of your data prior to enabling encryption incase of the key being forgotten, remember; the key is not saved within the user data file, unlike the setting for encryption itself, when launching the app after decrypting the data the key inside settings is set to the inputted key during data decryption."
+
+[node name="App" type="VBoxContainer" parent="Camera/ScreenContainer/MasterContainer/AppBody/Help/Container/Container/PageDisplay/ScrollContainer/PageContainer"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 15
+
+[node name="PageContent" parent="Camera/ScreenContainer/MasterContainer/AppBody/Help/Container/Container/PageDisplay/ScrollContainer/PageContainer/App" instance=ExtResource("15_ys48v")]
+layout_mode = 2
+title = "Tabs & Pages"
+body_text = "This app is broken up into 4 tabs, all of which are listed below:
+
+- Passwords: Where you can search for and manage all your Password entries, these entries include the Names, Logins, Passwords and associated Tags.
+- Tags: Where you can search for and manage all your Tags, these entries include Names and their associated Passwords.
+- App Settings: Where you can manage the functionality of the programme. This includes settings for the programmes Alphabet, options on Saving & Backups, etc.
+- Help: Where you are now, this is where information on the programme is held.
+
+Both the App Settings and Help tabs are broken into multiple Pages, the App Settings tab containes the following Pages:
+
+- General: Manages general app settings, including an FPS cap, and a toggle from Frame-Efficiency (Or Low Processor) mode and configuration for the programmes Alphabet.
+- Data: Manages settings for your data, such as Autosaving, AutoBackups and Encyption.
+- Search: Manager settings relating to searching, such as Case-Sensative mode and Strict-Search mode.
+
+...The Help page contains the following Pages:
+
+- Passwords: Information on Passwords and the Passwords tab.
+- Tags: Information on Tags and the Tags tab.
+- Data: Info and controls for Data managment, including Password, Tag and User data.
+- App: Information on how the app as a whole works.
+- Search: Information on how the Search function works.
+- Developer: Technical information on how the project is constructed and how it can be modified/redistributed."
+
+[node name="PageContent2" parent="Camera/ScreenContainer/MasterContainer/AppBody/Help/Container/Container/PageDisplay/ScrollContainer/PageContainer/App" instance=ExtResource("15_ys48v")]
+layout_mode = 2
+title = "Shortcuts"
+body_text = "This app features shortcuts for easier use, these include the following:
+
+- Ctrl + S : Save the programmes data.
+- 1 / P : Opens the Passwords tab.
+- 2 / T : Opens the Tags tab.
+- 3 / S : Opens the App Settings tab.
+- 4 / H / ? : Opens the Help tab."
+
+[node name="Search" type="VBoxContainer" parent="Camera/ScreenContainer/MasterContainer/AppBody/Help/Container/Container/PageDisplay/ScrollContainer/PageContainer"]
+visible = false
+layout_mode = 2
+theme_override_constants/separation = 15
+
+[node name="PageContent" parent="Camera/ScreenContainer/MasterContainer/AppBody/Help/Container/Container/PageDisplay/ScrollContainer/PageContainer/Search" instance=ExtResource("15_ys48v")]
+layout_mode = 2
+title = "Search"
+body_text = "Below are some settings and shortcuts for when you are searching either by the SearchBox in the Passwords or Tags pages, or when using the PopupSearchbox.
+
+'@all' - You can enter '@all' to search for every related element available, so every Password entry when searching through passwords or every Tag when searching through tags.
+
+Passwords '#' - If prefixing your query with a '#' when searching through Passwords, you will be given all Password entries with the tag following the '#'. Example; Searching with the query '#Gaming' would search through all your Password entries and return all with the tag 'Gaming'
+
+Tags '#' - If prefixing your query with a '#' when searching though Tags, you will be given all Tag entries with the password following '#'. Example; Searching with the query '#Google' would search through all your Tag entries and return all with the password called 'Google' in the tag's 'Used By' list.
+
+Passwords '£' - If prefixing your query with a '£' when searching through Passwords, you will be given all Password entries with the password following the '£'. Example; Searching with the query '£Password123' would return all Password entries who's password is 'Password123'.
+
+Passwords '&' - If prefixing your query with a '&' when searching through Passwords, you will be given all Password entries with the login following the '&'. Example; Searching with the query '&myaccount@hotmail.com' would return all Password entries who's login is 'myaccount@hotmail.com'
+
+Case-Sensative Search - If enabled in the App Settings, when searching your query must match the case of an item to be returned. Example; If enabled and you searched for 'Youtube', an entry with the name 'youtube' would not be returned.
+
+Strict-Search - If enabled in the App Settings, when searching your query must match letter-for-letter with an item to be returned, if Case-Sensative Search is enabled it also requires the case to match. Example; If enabled, searching for 'game' would return an entry called 'games', as 'game' is inside 'games'."
+
+[node name="Developer" type="VBoxContainer" parent="Camera/ScreenContainer/MasterContainer/AppBody/Help/Container/Container/PageDisplay/ScrollContainer/PageContainer"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 15
+
+[node name="PageContent" parent="Camera/ScreenContainer/MasterContainer/AppBody/Help/Container/Container/PageDisplay/ScrollContainer/PageContainer/Developer" instance=ExtResource("15_ys48v")]
+layout_mode = 2
+title = "Project Source"
+body_text = "This app is open-source, therefor the project files for this programme are freely available for you to modify and redistribute.
+
+If you would like to go to where the project source files are, please follow this link: https://github.com/NatZombieGames/NatPasswordProgramme 
+Above is where you can download the project source files, and are then free to modify and reupload as you please.
+This application is created via the Godot game engine, using version 4.3, and programmed using GD-Script, not C#. The file structure for the project files is as follows:
+
+- Assets; All the icons and other visual aspects of the programme.
+- Scenes; All the scenes of the project.
+- Scripts; All the GD-Script files for the project.
+- Other; Other assets which don't fit into the categories above, such as ButtonGroups and Styleboxes.
+
+This project is open-sourced via the Creative Commons License V1.0."
+
+[node name="PageContent2" parent="Camera/ScreenContainer/MasterContainer/AppBody/Help/Container/Container/PageDisplay/ScrollContainer/PageContainer/Developer" instance=ExtResource("15_ys48v")]
+layout_mode = 2
+title = "Creative Commons License"
+body_text = "This is the license under which this programme is distibuted under.
+
+-----
+
+Creative Commons Legal Code
+
+CC0 1.0 Universal
+
+    CREATIVE COMMONS CORPORATION IS NOT A LAW FIRM AND DOES NOT PROVIDE
+    LEGAL SERVICES. DISTRIBUTION OF THIS DOCUMENT DOES NOT CREATE AN
+    ATTORNEY-CLIENT RELATIONSHIP. CREATIVE COMMONS PROVIDES THIS
+    INFORMATION ON AN \"AS-IS\" BASIS. CREATIVE COMMONS MAKES NO WARRANTIES
+    REGARDING THE USE OF THIS DOCUMENT OR THE INFORMATION OR WORKS
+    PROVIDED HEREUNDER, AND DISCLAIMS LIABILITY FOR DAMAGES RESULTING FROM
+    THE USE OF THIS DOCUMENT OR THE INFORMATION OR WORKS PROVIDED
+    HEREUNDER.
+
+Statement of Purpose
+
+The laws of most jurisdictions throughout the world automatically confer
+exclusive Copyright and Related Rights (defined below) upon the creator
+and subsequent owner(s) (each and all, an \"owner\") of an original work of
+authorship and/or a database (each, a \"Work\").
+
+Certain owners wish to permanently relinquish those rights to a Work for
+the purpose of contributing to a commons of creative, cultural and
+scientific works (\"Commons\") that the public can reliably and without fear
+of later claims of infringement build upon, modify, incorporate in other
+works, reuse and redistribute as freely as possible in any form whatsoever
+and for any purposes, including without limitation commercial purposes.
+These owners may contribute to the Commons to promote the ideal of a free
+culture and the further production of creative, cultural and scientific
+works, or to gain reputation or greater distribution for their Work in
+part through the use and efforts of others.
+
+For these and/or other purposes and motivations, and without any
+expectation of additional consideration or compensation, the person
+associating CC0 with a Work (the \"Affirmer\"), to the extent that he or she
+is an owner of Copyright and Related Rights in the Work, voluntarily
+elects to apply CC0 to the Work and publicly distribute the Work under its
+terms, with knowledge of his or her Copyright and Related Rights in the
+Work and the meaning and intended legal effect of CC0 on those rights.
+
+1. Copyright and Related Rights. A Work made available under CC0 may be
+protected by copyright and related or neighboring rights (\"Copyright and
+Related Rights\"). Copyright and Related Rights include, but are not
+limited to, the following:
+
+  i. the right to reproduce, adapt, distribute, perform, display,
+     communicate, and translate a Work;
+ ii. moral rights retained by the original author(s) and/or performer(s);
+iii. publicity and privacy rights pertaining to a person's image or
+     likeness depicted in a Work;
+ iv. rights protecting against unfair competition in regards to a Work,
+     subject to the limitations in paragraph 4(a), below;
+  v. rights protecting the extraction, dissemination, use and reuse of data
+     in a Work;
+ vi. database rights (such as those arising under Directive 96/9/EC of the
+     European Parliament and of the Council of 11 March 1996 on the legal
+     protection of databases, and under any national implementation
+     thereof, including any amended or successor version of such
+     directive); and
+vii. other similar, equivalent or corresponding rights throughout the
+     world based on applicable law or treaty, and any national
+     implementations thereof.
+
+2. Waiver. To the greatest extent permitted by, but not in contravention
+of, applicable law, Affirmer hereby overtly, fully, permanently,
+irrevocably and unconditionally waives, abandons, and surrenders all of
+Affirmer's Copyright and Related Rights and associated claims and causes
+of action, whether now known or unknown (including existing as well as
+future claims and causes of action), in the Work (i) in all territories
+worldwide, (ii) for the maximum duration provided by applicable law or
+treaty (including future time extensions), (iii) in any current or future
+medium and for any number of copies, and (iv) for any purpose whatsoever,
+including without limitation commercial, advertising or promotional
+purposes (the \"Waiver\"). Affirmer makes the Waiver for the benefit of each
+member of the public at large and to the detriment of Affirmer's heirs and
+successors, fully intending that such Waiver shall not be subject to
+revocation, rescission, cancellation, termination, or any other legal or
+equitable action to disrupt the quiet enjoyment of the Work by the public
+as contemplated by Affirmer's express Statement of Purpose.
+
+3. Public License Fallback. Should any part of the Waiver for any reason
+be judged legally invalid or ineffective under applicable law, then the
+Waiver shall be preserved to the maximum extent permitted taking into
+account Affirmer's express Statement of Purpose. In addition, to the
+extent the Waiver is so judged Affirmer hereby grants to each affected
+person a royalty-free, non transferable, non sublicensable, non exclusive,
+irrevocable and unconditional license to exercise Affirmer's Copyright and
+Related Rights in the Work (i) in all territories worldwide, (ii) for the
+maximum duration provided by applicable law or treaty (including future
+time extensions), (iii) in any current or future medium and for any number
+of copies, and (iv) for any purpose whatsoever, including without
+limitation commercial, advertising or promotional purposes (the
+\"License\"). The License shall be deemed effective as of the date CC0 was
+applied by Affirmer to the Work. Should any part of the License for any
+reason be judged legally invalid or ineffective under applicable law, such
+partial invalidity or ineffectiveness shall not invalidate the remainder
+of the License, and in such case Affirmer hereby affirms that he or she
+will not (i) exercise any of his or her remaining Copyright and Related
+Rights in the Work or (ii) assert any associated claims and causes of
+action with respect to the Work, in either case contrary to Affirmer's
+express Statement of Purpose.
+
+4. Limitations and Disclaimers.
+
+ a. No trademark or patent rights held by Affirmer are waived, abandoned,
+    surrendered, licensed or otherwise affected by this document.
+ b. Affirmer offers the Work as-is and makes no representations or
+    warranties of any kind concerning the Work, express, implied,
+    statutory or otherwise, including without limitation warranties of
+    title, merchantability, fitness for a particular purpose, non
+    infringement, or the absence of latent or other defects, accuracy, or
+    the present or absence of errors, whether or not discoverable, all to
+    the greatest extent permissible under applicable law.
+ c. Affirmer disclaims responsibility for clearing rights of other persons
+    that may apply to the Work or any use thereof, including without
+    limitation any person's Copyright and Related Rights in the Work.
+    Further, Affirmer disclaims responsibility for obtaining any necessary
+    consents, permissions or other rights required for any use of the
+    Work.
+ d. Affirmer understands and acknowledges that Creative Commons is not a
+    party to this document and has no duty or obligation with respect to
+    this CC0 or use of the Work."
+
+[node name="NotificationContainer" type="Control" parent="Camera/ScreenContainer"]
+custom_minimum_size = Vector2(1920, 1080)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="PopupContainer" type="ColorRect" parent="Camera/ScreenContainer"]
+visible = false
+custom_minimum_size = Vector2(1920, 0)
+layout_mode = 2
+color = Color(0.0470588, 0.0470588, 0.0470588, 0.498039)
+
+[node name="TooltipContainer" type="Control" parent="Camera/ScreenContainer"]
+custom_minimum_size = Vector2(1920, 0)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="LoadingScreen" type="Control" parent="Camera/ScreenContainer"]
+process_mode = 3
+visible = false
+custom_minimum_size = Vector2(1920, 0)
+layout_mode = 2
+
+[node name="Background" type="ColorRect" parent="Camera/ScreenContainer/LoadingScreen"]
+custom_minimum_size = Vector2(1920, 1080)
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+color = Color(0, 0, 0, 1)
+
+[node name="Container" type="VBoxContainer" parent="Camera/ScreenContainer/LoadingScreen/Background"]
+custom_minimum_size = Vector2(1920, 1080)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -43.0
+offset_top = -27.0
+offset_right = 43.0
+offset_bottom = 27.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="Text" type="Label" parent="Camera/ScreenContainer/LoadingScreen/Background/Container"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 60
+text = "LOADING..."
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="LoadingBar" type="ProgressBar" parent="Camera/ScreenContainer/LoadingScreen/Background/Container"]
+process_mode = 3
+custom_minimum_size = Vector2(0, 55)
+layout_mode = 2
+step = 1.0
+rounded = true
+show_percentage = false
+indeterminate = true
+editor_preview_indeterminate = false
+
+[node name="FadePlayer" type="AnimationPlayer" parent="Camera/ScreenContainer/LoadingScreen"]
+libraries = {
+"": SubResource("AnimationLibrary_kctgn")
+}
+
+[node name="DecryptionScreen" type="Control" parent="Camera/ScreenContainer"]
+unique_name_in_owner = true
+visible = false
+custom_minimum_size = Vector2(1920, 0)
+layout_mode = 2
+mouse_filter = 1
+
+[node name="DataDecryptionPopup" parent="Camera/ScreenContainer/DecryptionScreen" instance=ExtResource("17_hbhgp")]
+layout_mode = 0
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_right = 1920.0
+offset_bottom = 1080.0
+grow_horizontal = 1
+grow_vertical = 1
+
+[node name="AutosaveTimer" type="Timer" parent="Camera/ScreenContainer"]
+unique_name_in_owner = true
+
+[connection signal="pressed" from="Camera/ScreenContainer/MasterContainer/HatBar/MinimizeBtn" to="." method="receive_window_control_buttons" binds= [0]]
+[connection signal="pressed" from="Camera/ScreenContainer/MasterContainer/HatBar/WindowBtn" to="." method="receive_window_control_buttons" binds= [1]]
+[connection signal="pressed" from="Camera/ScreenContainer/MasterContainer/HatBar/QuitBtn" to="." method="receive_window_control_buttons" binds= [2]]
+[connection signal="timeout" from="Camera/ScreenContainer/AutosaveTimer" to="." method="autosave_timer_timeout"]

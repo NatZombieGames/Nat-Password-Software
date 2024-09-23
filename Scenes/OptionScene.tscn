@@ -1,0 +1,155 @@
+[gd_scene load_steps=13 format=3 uid="uid://difk2ch2tqvdp"]
+
+[ext_resource type="StyleBox" uid="uid://bjtwshwihk5pn" path="res://Other/OptionSceneStylebox.tres" id="1_3wrue"]
+[ext_resource type="Script" path="res://Scripts/OptionScene.gd" id="1_b0upq"]
+[ext_resource type="StyleBox" uid="uid://d4ibgpmktdgv5" path="res://Other/OptionSceneConfirmationHoveredStylebox.tres" id="3_kuh74"]
+[ext_resource type="StyleBox" uid="uid://2dmk5ykwpuwt" path="res://Other/OptionSceneConfirmationPressedStylebox.tres" id="4_eck1j"]
+[ext_resource type="StyleBox" uid="uid://bff362nr36oiw" path="res://Other/OptionSceneConfirmationNormalStylebox.tres" id="5_pa61p"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_bk668"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6eln0"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.0980392, 0.0980392, 0.0980392, 1)
+border_color = Color(0.196078, 0.196078, 0.196078, 1)
+corner_radius_top_left = 25
+corner_radius_top_right = 25
+corner_radius_bottom_right = 25
+corner_radius_bottom_left = 25
+corner_detail = 15
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_d6f6i"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.196078, 0.196078, 0.196078, 1)
+border_color = Color(0.0588235, 0.0588235, 0.0588235, 1)
+corner_radius_top_left = 25
+corner_radius_top_right = 25
+corner_radius_bottom_right = 25
+corner_radius_bottom_left = 25
+corner_detail = 15
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_54i5o"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.0588235, 0.0588235, 0.0588235, 1)
+border_color = Color(0.196078, 0.196078, 0.196078, 1)
+corner_radius_top_left = 25
+corner_radius_top_right = 25
+corner_radius_bottom_right = 25
+corner_radius_bottom_left = 25
+corner_detail = 15
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_tkt2x"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_difle"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_3xrn8"]
+
+[node name="OptionScene" type="PanelContainer"]
+custom_minimum_size = Vector2(160, 45)
+offset_right = 164.0
+offset_bottom = 45.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_styles/panel = ExtResource("1_3wrue")
+script = ExtResource("1_b0upq")
+
+[node name="Container" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="Void" type="Panel" parent="Container"]
+layout_mode = 2
+
+[node name="NormalButton" type="Button" parent="Container"]
+unique_name_in_owner = true
+visible = false
+custom_minimum_size = Vector2(136, 21)
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_default_cursor_shape = 2
+theme_override_styles/focus = SubResource("StyleBoxEmpty_bk668")
+theme_override_styles/hover = SubResource("StyleBoxFlat_6eln0")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_d6f6i")
+theme_override_styles/normal = SubResource("StyleBoxFlat_54i5o")
+toggle_mode = true
+shortcut_feedback = false
+shortcut_in_tooltip = false
+
+[node name="CheckButton" type="CheckBox" parent="Container"]
+unique_name_in_owner = true
+layout_mode = 2
+mouse_default_cursor_shape = 2
+theme_override_styles/focus = SubResource("StyleBoxEmpty_tkt2x")
+shortcut_feedback = false
+shortcut_in_tooltip = false
+
+[node name="ToggleButton" type="CheckButton" parent="Container"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+mouse_default_cursor_shape = 2
+theme_override_styles/focus = SubResource("StyleBoxEmpty_difle")
+shortcut_feedback = false
+shortcut_in_tooltip = false
+
+[node name="Void2" type="Panel" parent="Container"]
+layout_mode = 2
+
+[node name="Text" type="Label" parent="Container"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 1
+text = "Placeholder"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SpinBox" type="SpinBox" parent="Container"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+mouse_default_cursor_shape = 1
+min_value = 1.0
+value = 1.0
+rounded = true
+update_on_text_changed = true
+
+[node name="TextBox" type="LineEdit" parent="Container"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+expand_to_text_length = true
+context_menu_enabled = false
+virtual_keyboard_enabled = false
+clear_button_enabled = true
+shortcut_keys_enabled = false
+caret_blink = true
+caret_blink_interval = 0.5
+
+[node name="SetButton" type="Button" parent="Container"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+theme_override_styles/focus = SubResource("StyleBoxEmpty_3xrn8")
+theme_override_styles/hover = ExtResource("3_kuh74")
+theme_override_styles/pressed = ExtResource("4_eck1j")
+theme_override_styles/normal = ExtResource("5_pa61p")
+text = "Set Value"
+
+[node name="Void3" type="Panel" parent="Container"]
+layout_mode = 2
+
+[connection signal="pressed" from="Container/NormalButton" to="." method="pressed"]
+[connection signal="pressed" from="Container/CheckButton" to="." method="pressed"]
+[connection signal="pressed" from="Container/ToggleButton" to="." method="pressed"]
+[connection signal="mouse_entered" from="Container/Text" to="." method="hovered" binds= [true]]
+[connection signal="mouse_exited" from="Container/Text" to="." method="hovered" binds= [false]]
+[connection signal="pressed" from="Container/SetButton" to="." method="pressed"]

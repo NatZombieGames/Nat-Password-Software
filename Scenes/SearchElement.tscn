@@ -1,0 +1,93 @@
+[gd_scene load_steps=6 format=3 uid="uid://bsncq4qay0aqo"]
+
+[ext_resource type="StyleBox" uid="uid://c1tkt82c3mker" path="res://Other/SearchElementStylebox.tres" id="1_ap5om"]
+[ext_resource type="Script" path="res://Scripts/SearchElement.gd" id="1_gwp3p"]
+[ext_resource type="PackedScene" uid="uid://cjr3qgwjg1kys" path="res://Scenes/AddEntryBtn.tscn" id="2_1hn7d"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nnqij"]
+content_margin_left = 8.0
+content_margin_top = 8.0
+content_margin_right = 8.0
+content_margin_bottom = 8.0
+bg_color = Color(0.294118, 0.294118, 0.294118, 1)
+border_color = Color(0.411765, 0.411765, 0.411765, 1)
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fj0db"]
+content_margin_left = 8.0
+content_margin_top = 8.0
+content_margin_right = 8.0
+content_margin_bottom = 8.0
+bg_color = Color(0.235294, 0.235294, 0.235294, 1)
+corner_detail = 1
+
+[node name="SearchElement" type="PanelContainer"]
+custom_minimum_size = Vector2(275, 0)
+offset_right = 275.0
+offset_bottom = 181.0
+size_flags_vertical = 3
+theme_override_styles/panel = ExtResource("1_ap5om")
+script = ExtResource("1_gwp3p")
+
+[node name="Container" type="VBoxContainer" parent="."]
+layout_mode = 2
+theme_override_constants/separation = -1
+
+[node name="SearchBox" type="LineEdit" parent="Container"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+theme_override_styles/focus = SubResource("StyleBoxFlat_nnqij")
+theme_override_styles/normal = SubResource("StyleBoxFlat_fj0db")
+placeholder_text = "Search..."
+context_menu_enabled = false
+virtual_keyboard_enabled = false
+clear_button_enabled = true
+flat = true
+caret_blink = true
+caret_blink_interval = 0.5
+
+[node name="SearchResultsCounter" type="Label" parent="Container"]
+unique_name_in_owner = true
+visible = false
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+text = "0 Results Found"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Separator" type="ColorRect" parent="Container"]
+custom_minimum_size = Vector2(0, 3)
+layout_mode = 2
+color = Color(0.196078, 0.196078, 0.196078, 1)
+
+[node name="Void" type="Panel" parent="Container"]
+self_modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+
+[node name="ResultListContainer" type="ScrollContainer" parent="Container"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+size_flags_vertical = 3
+scroll_vertical_custom_step = 1.0
+horizontal_scroll_mode = 0
+
+[node name="ResultList" type="VBoxContainer" parent="Container/ResultListContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 15
+
+[node name="AddEntryButton" parent="Container/ResultListContainer/ResultList" instance=ExtResource("2_1hn7d")]
+layout_mode = 2
+run_set_on_ready = true
+default_title = " New Password Entry"
+parent_path = ""
+
+[connection signal="text_changed" from="Container/SearchBox" to="." method="searchbox_text_changed"]
+[connection signal="text_submitted" from="Container/SearchBox" to="." method="search_submitted"]

@@ -1,0 +1,25 @@
+[gd_scene load_steps=3 format=3 uid="uid://dd4na1exlprsc"]
+
+[ext_resource type="StyleBox" uid="uid://44k253vkxhf1" path="res://Other/PageSelectorStylebox.tres" id="1_igd8k"]
+[ext_resource type="Script" path="res://Scripts/PageSelector.gd" id="1_ju8b4"]
+
+[node name="PageSelector" type="PanelContainer"]
+size_flags_vertical = 3
+theme_override_styles/panel = ExtResource("1_igd8k")
+script = ExtResource("1_ju8b4")
+
+[node name="VContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Void" type="Panel" parent="VContainer"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+
+[node name="HContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Void" type="Panel" parent="HContainer"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 2

@@ -1,0 +1,489 @@
+[gd_scene load_steps=21 format=3 uid="uid://c142jjsiisug6"]
+
+[ext_resource type="Script" path="res://Scripts/InfoPanel.gd" id="1_1ufan"]
+[ext_resource type="StyleBox" uid="uid://cjx3xuq8fsxif" path="res://Other/InfoPanelBackgroundStylebox.tres" id="1_k11eq"]
+[ext_resource type="Texture2D" uid="uid://c3ir688nlb6db" path="res://Assets/DeleteIcon.png" id="2_7j0wk"]
+[ext_resource type="Texture2D" uid="uid://cutact1kpkv2a" path="res://Assets/DeleteIcon_Pressed.png" id="3_yk5lg"]
+[ext_resource type="Texture2D" uid="uid://kadd7sdepwws" path="res://Assets/DeleteIcon_Hovered.png" id="4_bku7l"]
+[ext_resource type="Texture2D" uid="uid://cx17fuj05ndhe" path="res://Assets/EditIcon.png" id="5_a1ag0"]
+[ext_resource type="Texture2D" uid="uid://cvorui4m110lt" path="res://Assets/EditIcon_Pressed.png" id="6_sie61"]
+[ext_resource type="Texture2D" uid="uid://bf0wrk31emy1l" path="res://Assets/EditIcon_Hovered.png" id="7_jtvd1"]
+[ext_resource type="Texture2D" uid="uid://d1u6cpbqiq8bp" path="res://Assets/SaveIcon.png" id="8_r3k65"]
+[ext_resource type="Texture2D" uid="uid://bxb575om1euy4" path="res://Assets/SaveIcon_Pressed.png" id="9_c2wbh"]
+[ext_resource type="Texture2D" uid="uid://bcwag0fky0ahq" path="res://Assets/SaveIcon_Hovered.png" id="10_hr5bm"]
+[ext_resource type="Texture2D" uid="uid://cbau5wgxyhk46" path="res://Assets/CopyToClipboardIcon.png" id="11_ex8w8"]
+[ext_resource type="Texture2D" uid="uid://cf4vejw0dadmf" path="res://Assets/CopyToClipboardIcon_Pressed.png" id="12_a0y7b"]
+[ext_resource type="Texture2D" uid="uid://c2pmag0jfawec" path="res://Assets/CopyToClipboardIcon_Hovered.png" id="13_ys0wn"]
+[ext_resource type="PackedScene" uid="uid://difk2ch2tqvdp" path="res://Scenes/OptionScene.tscn" id="14_j6ows"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_rrnrb"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kg8ck"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.0117647, 0.0117647, 0.0117647, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.0470588, 0.0470588, 0.0470588, 1)
+corner_radius_top_left = 25
+corner_radius_top_right = 25
+corner_radius_bottom_right = 25
+corner_radius_bottom_left = 25
+corner_detail = 15
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gps8i"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.0980392, 0.0980392, 0.0980392, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.196078, 0.196078, 0.196078, 1)
+corner_radius_top_left = 25
+corner_radius_top_right = 25
+corner_radius_bottom_right = 25
+corner_radius_bottom_left = 25
+corner_detail = 15
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jcq2s"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.196078, 0.196078, 0.196078, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.0588235, 0.0588235, 0.0588235, 1)
+corner_radius_top_left = 25
+corner_radius_top_right = 25
+corner_radius_bottom_right = 25
+corner_radius_bottom_left = 25
+corner_detail = 15
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_o64uw"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.0588235, 0.0588235, 0.0588235, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.196078, 0.196078, 0.196078, 1)
+corner_radius_top_left = 25
+corner_radius_top_right = 25
+corner_radius_bottom_right = 25
+corner_radius_bottom_left = 25
+corner_detail = 15
+
+[node name="InfoPanel" type="PanelContainer"]
+custom_minimum_size = Vector2(1406, 739)
+size_flags_horizontal = 3
+theme_override_styles/panel = ExtResource("1_k11eq")
+script = ExtResource("1_1ufan")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
+layout_mode = 2
+follow_focus = true
+scroll_vertical_custom_step = 1.0
+horizontal_scroll_mode = 0
+scroll_deadzone = 1
+
+[node name="Container" type="VBoxContainer" parent="ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = -1
+
+[node name="EntryActionContainer" type="HBoxContainer" parent="ScrollContainer/Container"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="DeleteEntryBtn" type="TextureButton" parent="ScrollContainer/Container/EntryActionContainer"]
+custom_minimum_size = Vector2(38, 38)
+layout_mode = 2
+texture_normal = ExtResource("2_7j0wk")
+texture_pressed = ExtResource("3_yk5lg")
+texture_hover = ExtResource("4_bku7l")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="Separator" type="ColorRect" parent="ScrollContainer/Container"]
+custom_minimum_size = Vector2(0, 3)
+layout_mode = 2
+color = Color(0.196078, 0.196078, 0.196078, 1)
+
+[node name="TitleContainer" type="HBoxContainer" parent="ScrollContainer/Container"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="Void" type="Panel" parent="ScrollContainer/Container/TitleContainer"]
+self_modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(3, 0)
+layout_mode = 2
+
+[node name="EditTitleField" type="LineEdit" parent="ScrollContainer/Container/TitleContainer"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 50
+placeholder_text = "Title"
+context_menu_enabled = false
+virtual_keyboard_enabled = false
+clear_button_enabled = true
+shortcut_keys_enabled = false
+flat = true
+caret_blink = true
+caret_blink_interval = 0.5
+
+[node name="Title" type="Label" parent="ScrollContainer/Container/TitleContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 50
+text = "Title"
+vertical_alignment = 1
+clip_text = true
+text_overrun_behavior = 3
+
+[node name="Separator" type="ColorRect" parent="ScrollContainer/Container/TitleContainer"]
+custom_minimum_size = Vector2(3, 0)
+layout_mode = 2
+color = Color(0.196078, 0.196078, 0.196078, 1)
+
+[node name="EditTitleBtn" type="TextureButton" parent="ScrollContainer/Container/TitleContainer"]
+custom_minimum_size = Vector2(77, 77)
+layout_mode = 2
+texture_normal = ExtResource("5_a1ag0")
+texture_pressed = ExtResource("6_sie61")
+texture_hover = ExtResource("7_jtvd1")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="ChangeTitleBtn" type="TextureButton" parent="ScrollContainer/Container/TitleContainer"]
+visible = false
+custom_minimum_size = Vector2(77, 77)
+layout_mode = 2
+texture_normal = ExtResource("8_r3k65")
+texture_pressed = ExtResource("9_c2wbh")
+texture_hover = ExtResource("10_hr5bm")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="Separator2" type="ColorRect" parent="ScrollContainer/Container"]
+custom_minimum_size = Vector2(0, 3)
+layout_mode = 2
+color = Color(0.196078, 0.196078, 0.196078, 1)
+
+[node name="LoginContainer" type="HBoxContainer" parent="ScrollContainer/Container"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="Void" type="Panel" parent="ScrollContainer/Container/LoginContainer"]
+self_modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(3, 0)
+layout_mode = 2
+
+[node name="EditLoginField" type="LineEdit" parent="ScrollContainer/Container/LoginContainer"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 50
+placeholder_text = "Title"
+context_menu_enabled = false
+virtual_keyboard_enabled = false
+clear_button_enabled = true
+shortcut_keys_enabled = false
+flat = true
+caret_blink = true
+caret_blink_interval = 0.5
+
+[node name="Title" type="Label" parent="ScrollContainer/Container/LoginContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 50
+text = "Login"
+vertical_alignment = 1
+clip_text = true
+text_overrun_behavior = 3
+
+[node name="Separator" type="ColorRect" parent="ScrollContainer/Container/LoginContainer"]
+custom_minimum_size = Vector2(3, 0)
+layout_mode = 2
+color = Color(0.196078, 0.196078, 0.196078, 1)
+
+[node name="EditLoginBtn" type="TextureButton" parent="ScrollContainer/Container/LoginContainer"]
+custom_minimum_size = Vector2(77, 77)
+layout_mode = 2
+texture_normal = ExtResource("5_a1ag0")
+texture_pressed = ExtResource("6_sie61")
+texture_hover = ExtResource("7_jtvd1")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="ChangeLoginBtn" type="TextureButton" parent="ScrollContainer/Container/LoginContainer"]
+visible = false
+custom_minimum_size = Vector2(77, 77)
+layout_mode = 2
+texture_normal = ExtResource("8_r3k65")
+texture_pressed = ExtResource("9_c2wbh")
+texture_hover = ExtResource("10_hr5bm")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="Separator3" type="ColorRect" parent="ScrollContainer/Container"]
+custom_minimum_size = Vector2(0, 3)
+layout_mode = 2
+color = Color(0.196078, 0.196078, 0.196078, 1)
+
+[node name="PasswordContainer" type="HBoxContainer" parent="ScrollContainer/Container"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="PasswordDisplay" type="Label" parent="ScrollContainer/Container/PasswordContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 50
+text = " Password"
+vertical_alignment = 1
+clip_text = true
+text_overrun_behavior = 3
+
+[node name="Separator" type="ColorRect" parent="ScrollContainer/Container/PasswordContainer"]
+custom_minimum_size = Vector2(3, 0)
+layout_mode = 2
+color = Color(0.196078, 0.196078, 0.196078, 1)
+
+[node name="CopyPasswordBtn" type="TextureButton" parent="ScrollContainer/Container/PasswordContainer"]
+custom_minimum_size = Vector2(77, 77)
+layout_mode = 2
+texture_normal = ExtResource("11_ex8w8")
+texture_pressed = ExtResource("12_a0y7b")
+texture_hover = ExtResource("13_ys0wn")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="Separator2" type="ColorRect" parent="ScrollContainer/Container/PasswordContainer"]
+custom_minimum_size = Vector2(3, 0)
+layout_mode = 2
+color = Color(0.196078, 0.196078, 0.196078, 1)
+
+[node name="EditPasswordBtn" type="TextureButton" parent="ScrollContainer/Container/PasswordContainer"]
+custom_minimum_size = Vector2(77, 77)
+layout_mode = 2
+texture_normal = ExtResource("5_a1ag0")
+texture_pressed = ExtResource("6_sie61")
+texture_hover = ExtResource("7_jtvd1")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="ChangePasswordBtn" type="TextureButton" parent="ScrollContainer/Container/PasswordContainer"]
+visible = false
+custom_minimum_size = Vector2(77, 77)
+layout_mode = 2
+texture_normal = ExtResource("8_r3k65")
+texture_pressed = ExtResource("9_c2wbh")
+texture_hover = ExtResource("10_hr5bm")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="Separator4" type="ColorRect" parent="ScrollContainer/Container"]
+custom_minimum_size = Vector2(0, 3)
+layout_mode = 2
+color = Color(0.196078, 0.196078, 0.196078, 1)
+
+[node name="PasswordGenerationContainer" type="VBoxContainer" parent="ScrollContainer/Container"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+
+[node name="Void" type="Panel" parent="ScrollContainer/Container/PasswordGenerationContainer"]
+self_modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(0, 3)
+layout_mode = 2
+
+[node name="Row1" type="HBoxContainer" parent="ScrollContainer/Container/PasswordGenerationContainer"]
+layout_mode = 2
+
+[node name="Void" type="Panel" parent="ScrollContainer/Container/PasswordGenerationContainer/Row1"]
+self_modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(3, 0)
+layout_mode = 2
+
+[node name="NewPasswordField" type="LineEdit" parent="ScrollContainer/Container/PasswordGenerationContainer/Row1"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "newpassword123"
+placeholder_text = "NewPassword"
+context_menu_enabled = false
+virtual_keyboard_enabled = false
+clear_button_enabled = true
+select_all_on_focus = true
+caret_blink = true
+caret_blink_interval = 0.5
+
+[node name="Void2" type="Panel" parent="ScrollContainer/Container/PasswordGenerationContainer/Row1"]
+self_modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(3, 0)
+layout_mode = 2
+
+[node name="Void2" type="Panel" parent="ScrollContainer/Container/PasswordGenerationContainer"]
+self_modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(0, 3)
+layout_mode = 2
+
+[node name="Row2" type="HBoxContainer" parent="ScrollContainer/Container/PasswordGenerationContainer"]
+layout_mode = 2
+
+[node name="Void" type="Panel" parent="ScrollContainer/Container/PasswordGenerationContainer/Row2"]
+self_modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(3, 0)
+layout_mode = 2
+
+[node name="GenerateBtn" type="Button" parent="ScrollContainer/Container/PasswordGenerationContainer/Row2"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+theme_override_styles/focus = SubResource("StyleBoxEmpty_rrnrb")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_kg8ck")
+theme_override_styles/hover = SubResource("StyleBoxFlat_gps8i")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_jcq2s")
+theme_override_styles/normal = SubResource("StyleBoxFlat_o64uw")
+text = " Generate New Password "
+
+[node name="Void3" type="Panel" parent="ScrollContainer/Container/PasswordGenerationContainer"]
+self_modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(0, 3)
+layout_mode = 2
+
+[node name="Row3" type="HBoxContainer" parent="ScrollContainer/Container/PasswordGenerationContainer"]
+layout_mode = 2
+
+[node name="Void" type="Panel" parent="ScrollContainer/Container/PasswordGenerationContainer/Row3"]
+self_modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(3, 0)
+layout_mode = 2
+
+[node name="LengthText" type="Label" parent="ScrollContainer/Container/PasswordGenerationContainer/Row3"]
+layout_mode = 2
+text = "Generated Password Length "
+
+[node name="PasswordLength" type="SpinBox" parent="ScrollContainer/Container/PasswordGenerationContainer/Row3"]
+layout_mode = 2
+min_value = 1.0
+value = 1.0
+rounded = true
+update_on_text_changed = true
+custom_arrow_step = 1.0
+
+[node name="Void4" type="Panel" parent="ScrollContainer/Container/PasswordGenerationContainer"]
+self_modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(0, 3)
+layout_mode = 2
+
+[node name="Row4" type="HBoxContainer" parent="ScrollContainer/Container/PasswordGenerationContainer"]
+layout_mode = 2
+
+[node name="Void" type="Panel" parent="ScrollContainer/Container/PasswordGenerationContainer/Row4"]
+self_modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(3, 0)
+layout_mode = 2
+
+[node name="OptionsList" type="VBoxContainer" parent="ScrollContainer/Container/PasswordGenerationContainer/Row4"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_constants/separation = 10
+
+[node name="SpecialCharactersSetting" parent="ScrollContainer/Container/PasswordGenerationContainer/Row4/OptionsList" instance=ExtResource("14_j6ows")]
+layout_mode = 2
+run_set_on_ready = true
+button_type = 1
+default_text = "Atleast 1 Special Character"
+text_tooltip = "If enabled; your generated password will contain >=1 Special character."
+tooltip_width = 500
+
+[node name="UpperCaseSetting" parent="ScrollContainer/Container/PasswordGenerationContainer/Row4/OptionsList" instance=ExtResource("14_j6ows")]
+layout_mode = 2
+run_set_on_ready = true
+default_id = 1
+button_type = 1
+default_text = "Atleast 1 Upper-Case Character"
+text_tooltip = "If enabled; your generated password will contain >=1 UpperCase (Capital) character."
+tooltip_width = 500
+
+[node name="LowerCaseSetting" parent="ScrollContainer/Container/PasswordGenerationContainer/Row4/OptionsList" instance=ExtResource("14_j6ows")]
+layout_mode = 2
+run_set_on_ready = true
+default_id = 2
+button_type = 1
+default_text = "Atleast 1 Lower-Case Character"
+text_tooltip = "If enabled; your generated password will contain >=1 LowerCase character."
+tooltip_width = 500
+
+[node name="NumberSetting" parent="ScrollContainer/Container/PasswordGenerationContainer/Row4/OptionsList" instance=ExtResource("14_j6ows")]
+layout_mode = 2
+run_set_on_ready = true
+default_id = 3
+button_type = 1
+default_text = "Atleast 1 Number"
+text_tooltip = "If enabled; your generated password will contain >=1 Number character."
+tooltip_width = 500
+
+[node name="Void5" type="Panel" parent="ScrollContainer/Container/PasswordGenerationContainer"]
+self_modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(0, 3)
+layout_mode = 2
+
+[node name="Separator5" type="ColorRect" parent="ScrollContainer/Container"]
+visible = false
+custom_minimum_size = Vector2(0, 3)
+layout_mode = 2
+color = Color(0.196078, 0.196078, 0.196078, 1)
+
+[node name="MarginContainer" type="MarginContainer" parent="ScrollContainer/Container"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 15
+
+[node name="TagsList" type="HFlowContainer" parent="ScrollContainer/Container/MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/h_separation = 15
+theme_override_constants/v_separation = 20
+last_wrap_alignment = 1
+
+[connection signal="pressed" from="ScrollContainer/Container/EntryActionContainer/DeleteEntryBtn" to="." method="handle_entry_actions" binds= [0]]
+[connection signal="mouse_entered" from="ScrollContainer/Container/TitleContainer/EditTitleField" to="." method="hovered" binds= [true, 0]]
+[connection signal="mouse_exited" from="ScrollContainer/Container/TitleContainer/EditTitleField" to="." method="hovered" binds= [false, 0]]
+[connection signal="mouse_entered" from="ScrollContainer/Container/TitleContainer/Title" to="." method="hovered" binds= [true, 0]]
+[connection signal="mouse_exited" from="ScrollContainer/Container/TitleContainer/Title" to="." method="hovered" binds= [false, 0]]
+[connection signal="pressed" from="ScrollContainer/Container/TitleContainer/EditTitleBtn" to="." method="receive_edit_buttons" binds= [0, 0]]
+[connection signal="pressed" from="ScrollContainer/Container/TitleContainer/ChangeTitleBtn" to="." method="receive_edit_buttons" binds= [0, 1]]
+[connection signal="mouse_entered" from="ScrollContainer/Container/LoginContainer/EditLoginField" to="." method="hovered" binds= [true, 1]]
+[connection signal="mouse_exited" from="ScrollContainer/Container/LoginContainer/EditLoginField" to="." method="hovered" binds= [false, 1]]
+[connection signal="mouse_entered" from="ScrollContainer/Container/LoginContainer/Title" to="." method="hovered" binds= [true, 1]]
+[connection signal="mouse_exited" from="ScrollContainer/Container/LoginContainer/Title" to="." method="hovered" binds= [false, 1]]
+[connection signal="pressed" from="ScrollContainer/Container/LoginContainer/EditLoginBtn" to="." method="receive_edit_buttons" binds= [1, 0]]
+[connection signal="pressed" from="ScrollContainer/Container/LoginContainer/ChangeLoginBtn" to="." method="receive_edit_buttons" binds= [1, 1]]
+[connection signal="mouse_entered" from="ScrollContainer/Container/PasswordContainer/PasswordDisplay" to="." method="hovered" binds= [true, 2]]
+[connection signal="mouse_exited" from="ScrollContainer/Container/PasswordContainer/PasswordDisplay" to="." method="hovered" binds= [false, 2]]
+[connection signal="pressed" from="ScrollContainer/Container/PasswordContainer/CopyPasswordBtn" to="." method="copy_password"]
+[connection signal="pressed" from="ScrollContainer/Container/PasswordContainer/EditPasswordBtn" to="." method="receive_edit_buttons" binds= [2, 0]]
+[connection signal="pressed" from="ScrollContainer/Container/PasswordContainer/ChangePasswordBtn" to="." method="receive_edit_buttons" binds= [2, 1]]
+[connection signal="pressed" from="ScrollContainer/Container/PasswordGenerationContainer/Row2/GenerateBtn" to="." method="generate_password"]
+[connection signal="mouse_entered" from="ScrollContainer/Container/PasswordGenerationContainer/Row3/LengthText" to="." method="hovered" binds= [true, 3]]
+[connection signal="mouse_exited" from="ScrollContainer/Container/PasswordGenerationContainer/Row3/LengthText" to="." method="hovered" binds= [false, 3]]

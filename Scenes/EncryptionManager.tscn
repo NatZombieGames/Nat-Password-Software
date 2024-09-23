@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://c1vgvla84wn2q"]
+
+[ext_resource type="Script" path="res://Scripts/EncryptionManager.gd" id="1_6if84"]
+
+[node name="EncryptionManager" type="Node"]
+script = ExtResource("1_6if84")

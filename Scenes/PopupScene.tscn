@@ -1,0 +1,71 @@
+[gd_scene load_steps=3 format=3 uid="uid://cell0g8qd8kay"]
+
+[ext_resource type="Script" path="res://Scripts/PopupScene.gd" id="1_nfoj0"]
+[ext_resource type="StyleBox" uid="uid://5gp6u2fdw2a0" path="res://Other/PopupSceneStylebox.tres" id="1_vaiq0"]
+
+[node name="PopupScene" type="PanelContainer"]
+top_level = true
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -736.0
+offset_top = -184.0
+offset_right = 736.0
+offset_bottom = 184.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = ExtResource("1_vaiq0")
+script = ExtResource("1_nfoj0")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
+layout_mode = 2
+scroll_vertical_custom_step = 1.0
+horizontal_scroll_mode = 0
+
+[node name="Container" type="VBoxContainer" parent="ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Void" type="Panel" parent="ScrollContainer/Container"]
+self_modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+
+[node name="Title" type="Label" parent="ScrollContainer/Container"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(1440, 1)
+layout_mode = 2
+theme_override_font_sizes/font_size = 65
+text = "Placeholder"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="Void2" type="Panel" parent="ScrollContainer/Container"]
+self_modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+
+[node name="Separator" type="ColorRect" parent="ScrollContainer/Container"]
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+color = Color(0.196078, 0.196078, 0.196078, 1)
+
+[node name="ButtonsContainer" type="MarginContainer" parent="ScrollContainer/Container"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="Buttons" type="GridContainer" parent="ScrollContainer/Container/ButtonsContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/h_separation = 185
+theme_override_constants/v_separation = 25
+columns = 2

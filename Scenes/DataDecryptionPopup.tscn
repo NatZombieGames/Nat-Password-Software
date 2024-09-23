@@ -1,0 +1,134 @@
+[gd_scene load_steps=12 format=3 uid="uid://buy2fhx7cw5wv"]
+
+[ext_resource type="StyleBox" uid="uid://jvc6ydncn2dh" path="res://Other/AppBodyPanelStylebox.tres" id="1_4tyra"]
+[ext_resource type="Script" path="res://Scripts/DataDecryptionPopup.gd" id="1_qx07w"]
+[ext_resource type="StyleBox" uid="uid://dqc7bjcddtf2n" path="res://Other/AddEntryHoveredStylebox.tres" id="2_dix2h"]
+[ext_resource type="StyleBox" uid="uid://tl02ryafvrfm" path="res://Other/AddEntryPressedStylebox.tres" id="3_7sskg"]
+[ext_resource type="StyleBox" uid="uid://cg4odcwiqmxwk" path="res://Other/AddEntryNormalStylebox.tres" id="4_cbery"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_81m2b"]
+bg_color = Color(0.0605303, 0.0605304, 0.0605303, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_pdf5i"]
+
+[sub_resource type="InputEventAction" id="InputEventAction_wfyfs"]
+action = &"Enter"
+
+[sub_resource type="Shortcut" id="Shortcut_p4mr0"]
+events = [SubResource("InputEventAction_wfyfs")]
+
+[sub_resource type="InputEventAction" id="InputEventAction_gcr0s"]
+action = &"Back"
+
+[sub_resource type="Shortcut" id="Shortcut_2nmry"]
+events = [SubResource("InputEventAction_gcr0s")]
+
+[node name="DataDecryptionPopup" type="PanelContainer"]
+process_mode = 2
+custom_minimum_size = Vector2(1920, 1080)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_81m2b")
+script = ExtResource("1_qx07w")
+
+[node name="ContentContainer" type="PanelContainer" parent="."]
+custom_minimum_size = Vector2(750, 500)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_styles/panel = ExtResource("1_4tyra")
+
+[node name="Container" type="VBoxContainer" parent="ContentContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="Title" type="Label" parent="ContentContainer/Container"]
+custom_minimum_size = Vector2(646, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 23
+text = "This Data Has Been Detected As Encrypted, Please Provide A 4-Digit Key To Decrypt The Data"
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="Separator" type="ColorRect" parent="ContentContainer/Container"]
+custom_minimum_size = Vector2(0, 16)
+layout_mode = 2
+color = Color(0.0980392, 0.0980392, 0.0980392, 1)
+
+[node name="ChancesLabel" type="Label" parent="ContentContainer/Container"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Chances Remaining: 3"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="KeyEntryContainer" type="HBoxContainer" parent="ContentContainer/Container"]
+layout_mode = 2
+alignment = 1
+
+[node name="KeyLabel" type="Label" parent="ContentContainer/Container/KeyEntryContainer"]
+layout_mode = 2
+text = "Key: "
+
+[node name="KeyEntryBox" type="LineEdit" parent="ContentContainer/Container/KeyEntryContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+placeholder_text = "0000"
+alignment = 1
+max_length = 4
+context_menu_enabled = false
+virtual_keyboard_enabled = false
+clear_button_enabled = true
+drag_and_drop_selection_enabled = false
+
+[node name="ErrorLabel" type="Label" parent="ContentContainer/Container"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+text = "ERROR: Key is invalid."
+horizontal_alignment = 1
+
+[node name="ButtonContainer" type="HBoxContainer" parent="ContentContainer/Container"]
+layout_mode = 2
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="SubmitBtn" type="Button" parent="ContentContainer/Container/ButtonContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+mouse_default_cursor_shape = 2
+theme_override_styles/focus = SubResource("StyleBoxEmpty_pdf5i")
+theme_override_styles/hover = ExtResource("2_dix2h")
+theme_override_styles/pressed = ExtResource("3_7sskg")
+theme_override_styles/normal = ExtResource("4_cbery")
+shortcut = SubResource("Shortcut_p4mr0")
+shortcut_feedback = false
+shortcut_in_tooltip = false
+text = "  Submit Key  "
+
+[node name="QuitBtn" type="Button" parent="ContentContainer/Container/ButtonContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+mouse_default_cursor_shape = 2
+theme_override_styles/focus = SubResource("StyleBoxEmpty_pdf5i")
+theme_override_styles/hover = ExtResource("2_dix2h")
+theme_override_styles/pressed = ExtResource("3_7sskg")
+theme_override_styles/normal = ExtResource("4_cbery")
+shortcut = SubResource("Shortcut_2nmry")
+shortcut_feedback = false
+shortcut_in_tooltip = false
+text = "  Quit Programme  "
+
+[node name="Timer" type="Timer" parent="."]
+unique_name_in_owner = true
+one_shot = true
+
+[connection signal="gui_input" from="ContentContainer/Container/KeyEntryContainer/KeyEntryBox" to="." method="receive_keyentry_input"]
+[connection signal="pressed" from="ContentContainer/Container/ButtonContainer/SubmitBtn" to="." method="handle_buttons" binds= [0]]
+[connection signal="pressed" from="ContentContainer/Container/ButtonContainer/QuitBtn" to="." method="handle_buttons" binds= [1]]

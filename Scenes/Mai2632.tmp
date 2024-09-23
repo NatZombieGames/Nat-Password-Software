@@ -1,0 +1,460 @@
+[gd_scene load_steps=25 format=3 uid="uid://bam4ff3h0tn3h"]
+
+[ext_resource type="Script" path="res://Scripts/Main.gd" id="1_6hid6"]
+[ext_resource type="Texture2D" uid="uid://hq5848tbf2fa" path="res://Assets/SoftwareLogoCircle_1.png" id="1_sw0tc"]
+[ext_resource type="Texture2D" uid="uid://eyopq06g7dre" path="res://Assets/MinimizeIcon.png" id="2_2dwtu"]
+[ext_resource type="Texture2D" uid="uid://b3g2gm1bs7nyp" path="res://Assets/MinimizeIcon_Pressed.png" id="3_yoeou"]
+[ext_resource type="Texture2D" uid="uid://b25urxfxf6117" path="res://Assets/MinimizeIcon_Hovered.png" id="4_v2mnq"]
+[ext_resource type="Texture2D" uid="uid://g0oa8casnhq1" path="res://Assets/WindowIcon.png" id="5_e2bl4"]
+[ext_resource type="Texture2D" uid="uid://dvvms4mtgdrd6" path="res://Assets/WindowIcon_Pressed.png" id="6_808y1"]
+[ext_resource type="Texture2D" uid="uid://bnrrvifr0lqbq" path="res://Assets/WindowIcon_Hovered.png" id="7_1060q"]
+[ext_resource type="Texture2D" uid="uid://h6jmxplpaaoo" path="res://Assets/QuitIcon.png" id="8_n7tuo"]
+[ext_resource type="Texture2D" uid="uid://bpsu46emcej1p" path="res://Assets/QuitIcon_Pressed.png" id="9_bdp7q"]
+[ext_resource type="Texture2D" uid="uid://cmfl8j461s3sd" path="res://Assets/QuitIcon_Hovered.png" id="10_4hxvp"]
+[ext_resource type="PackedScene" uid="uid://dd4na1exlprsc" path="res://Scenes/PageSelector.tscn" id="12_6yc3s"]
+[ext_resource type="PackedScene" uid="uid://bsncq4qay0aqo" path="res://Scenes/SearchElement.tscn" id="13_3ebvp"]
+[ext_resource type="PackedScene" uid="uid://c142jjsiisug6" path="res://Scenes/InfoPanel.tscn" id="14_tr1xh"]
+[ext_resource type="PackedScene" uid="uid://swr8nsy32e14" path="res://Scenes/PageContent.tscn" id="15_ys48v"]
+
+[sub_resource type="ButtonGroup" id="ButtonGroup_0of28"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_l53ca"]
+content_margin_left = 52.0
+content_margin_top = 52.0
+content_margin_right = 52.0
+content_margin_bottom = 52.0
+bg_color = Color(0.0588235, 0.0588235, 0.0588235, 1)
+border_width_left = 32
+border_width_top = 32
+border_width_right = 32
+border_width_bottom = 32
+border_color = Color(0.0980392, 0.0980392, 0.0980392, 1)
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_net3x"]
+content_margin_left = 52.0
+content_margin_top = 52.0
+content_margin_right = 52.0
+content_margin_bottom = 52.0
+bg_color = Color(0.0588235, 0.0588235, 0.0588235, 1)
+border_width_left = 32
+border_width_top = 32
+border_width_right = 32
+border_width_bottom = 32
+border_color = Color(0.0980392, 0.0980392, 0.0980392, 1)
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+
+[sub_resource type="ButtonGroup" id="ButtonGroup_vnp07"]
+allow_unpress = true
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_epeum"]
+bg_color = Color(0.0588235, 0.0588235, 0.0588235, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.196078, 0.196078, 0.196078, 1)
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+
+[sub_resource type="ButtonGroup" id="ButtonGroup_urwjy"]
+
+[sub_resource type="Animation" id="Animation_cs1ou"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_ar5tu"]
+resource_name = "fadeout"
+length = 0.25
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.233333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_kctgn"]
+_data = {
+"RESET": SubResource("Animation_cs1ou"),
+"fadeout": SubResource("Animation_ar5tu")
+}
+
+[node name="Main" type="Control"]
+custom_minimum_size = Vector2(1920, 1080)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_6hid6")
+
+[node name="Camera" type="Camera2D" parent="."]
+anchor_mode = 0
+zoom = Vector2(0.6, 0.6)
+
+[node name="ScreenContainer" type="AspectRatioContainer" parent="Camera"]
+custom_minimum_size = Vector2(1920, 1080)
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Background" type="ColorRect" parent="Camera/ScreenContainer"]
+custom_minimum_size = Vector2(1920, 0)
+layout_mode = 2
+color = Color(0.0588235, 0.0588235, 0.0588235, 1)
+
+[node name="MasterContainer" type="VBoxContainer" parent="Camera/ScreenContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(1920, 0)
+layout_mode = 2
+theme_override_constants/separation = -1
+
+[node name="HatBar" type="HBoxContainer" parent="Camera/ScreenContainer/MasterContainer"]
+layout_mode = 2
+
+[node name="AppLogo" type="TextureRect" parent="Camera/ScreenContainer/MasterContainer/HatBar"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+texture = ExtResource("1_sw0tc")
+stretch_mode = 5
+
+[node name="AppTitle" type="Label" parent="Camera/ScreenContainer/MasterContainer/HatBar"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Nat Password Software"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="AppVersion" type="Label" parent="Camera/ScreenContainer/MasterContainer/HatBar"]
+layout_mode = 2
+text = "v1"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Void" type="Panel" parent="Camera/ScreenContainer/MasterContainer/HatBar"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="MinimizeBtn" type="TextureButton" parent="Camera/ScreenContainer/MasterContainer/HatBar"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+shortcut_feedback = false
+shortcut_in_tooltip = false
+texture_normal = ExtResource("2_2dwtu")
+texture_pressed = ExtResource("3_yoeou")
+texture_hover = ExtResource("4_v2mnq")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="WindowBtn" type="TextureButton" parent="Camera/ScreenContainer/MasterContainer/HatBar"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+shortcut_feedback = false
+shortcut_in_tooltip = false
+texture_normal = ExtResource("5_e2bl4")
+texture_pressed = ExtResource("6_808y1")
+texture_hover = ExtResource("7_1060q")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="QuitBtn" type="TextureButton" parent="Camera/ScreenContainer/MasterContainer/HatBar"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+shortcut_feedback = false
+shortcut_in_tooltip = false
+texture_normal = ExtResource("8_n7tuo")
+texture_pressed = ExtResource("9_bdp7q")
+texture_hover = ExtResource("10_4hxvp")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="Separator" type="ColorRect" parent="Camera/ScreenContainer/MasterContainer"]
+custom_minimum_size = Vector2(0, 3)
+layout_mode = 2
+color = Color(0.196078, 0.196078, 0.196078, 1)
+
+[node name="TabBar" parent="Camera/ScreenContainer/MasterContainer" instance=ExtResource("12_6yc3s")]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+size_flags_vertical = 1
+button_group = SubResource("ButtonGroup_0of28")
+is_self_visible = 1
+type = 1
+buttons = Array[String](["Passwords", "Tags", "App Settings", "Help"])
+
+[node name="Separator2" type="ColorRect" parent="Camera/ScreenContainer/MasterContainer"]
+custom_minimum_size = Vector2(0, 3)
+layout_mode = 2
+color = Color(0.196078, 0.196078, 0.196078, 1)
+
+[node name="AppBody" type="Control" parent="Camera/ScreenContainer/MasterContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Passwords" type="Control" parent="Camera/ScreenContainer/MasterContainer/AppBody"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="PanelContainer" parent="Camera/ScreenContainer/MasterContainer/AppBody/Passwords"]
+custom_minimum_size = Vector2(1820, 843)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -910.0
+offset_top = -421.5
+offset_right = 910.0
+offset_bottom = 421.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_l53ca")
+
+[node name="Container" type="HBoxContainer" parent="Camera/ScreenContainer/MasterContainer/AppBody/Passwords/Panel"]
+layout_mode = 2
+theme_override_constants/separation = 35
+
+[node name="SearchElement" parent="Camera/ScreenContainer/MasterContainer/AppBody/Passwords/Panel/Container" instance=ExtResource("13_3ebvp")]
+layout_mode = 2
+add_entry_title = "New Password Entry"
+add_entry_id = -1
+
+[node name="InfoPanel" parent="Camera/ScreenContainer/MasterContainer/AppBody/Passwords/Panel/Container" instance=ExtResource("14_tr1xh")]
+layout_mode = 2
+
+[node name="Tags" type="Control" parent="Camera/ScreenContainer/MasterContainer/AppBody"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="PanelContainer" parent="Camera/ScreenContainer/MasterContainer/AppBody/Tags"]
+custom_minimum_size = Vector2(1820, 843)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -910.0
+offset_top = -421.5
+offset_right = 910.0
+offset_bottom = 421.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_net3x")
+
+[node name="Container" type="HBoxContainer" parent="Camera/ScreenContainer/MasterContainer/AppBody/Tags/Panel"]
+layout_mode = 2
+theme_override_constants/separation = 35
+
+[node name="SearchElement" parent="Camera/ScreenContainer/MasterContainer/AppBody/Tags/Panel/Container" instance=ExtResource("13_3ebvp")]
+layout_mode = 2
+add_entry_title = "Create New Tag"
+add_entry_id = -1
+type = 1
+
+[node name="InfoPanel" parent="Camera/ScreenContainer/MasterContainer/AppBody/Tags/Panel/Container" instance=ExtResource("14_tr1xh")]
+layout_mode = 2
+type = 1
+
+[node name="AppSettings" type="Control" parent="Camera/ScreenContainer/MasterContainer/AppBody"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+
+[node name="Container" type="PanelContainer" parent="Camera/ScreenContainer/MasterContainer/AppBody/AppSettings"]
+custom_minimum_size = Vector2(1820, 843)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -910.0
+offset_top = -421.5
+offset_right = 910.0
+offset_bottom = 421.5
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+theme_override_styles/panel = SubResource("StyleBoxFlat_l53ca")
+
+[node name="Container" type="HBoxContainer" parent="Camera/ScreenContainer/MasterContainer/AppBody/AppSettings/Container"]
+layout_mode = 2
+theme_override_constants/separation = 35
+
+[node name="PageSelector" parent="Camera/ScreenContainer/MasterContainer/AppBody/AppSettings/Container/Container" instance=ExtResource("12_6yc3s")]
+custom_minimum_size = Vector2(275, 0)
+layout_mode = 2
+button_group = SubResource("ButtonGroup_vnp07")
+selector_id = 1
+buttons = Array[String](["General"])
+
+[node name="PageDisplay" type="PanelContainer" parent="Camera/ScreenContainer/MasterContainer/AppBody/AppSettings/Container/Container"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 1
+theme_override_styles/panel = SubResource("StyleBoxFlat_epeum")
+
+[node name="General" type="VBoxContainer" parent="Camera/ScreenContainer/MasterContainer/AppBody/AppSettings/Container/Container/PageDisplay"]
+layout_mode = 2
+theme_override_constants/separation = 15
+
+[node name="PageContent" parent="Camera/ScreenContainer/MasterContainer/AppBody/AppSettings/Container/Container/PageDisplay/General" instance=ExtResource("15_ys48v")]
+layout_mode = 2
+size_flags_vertical = 1
+mouse_filter = 0
+title = "General"
+button_1_on = true
+button_1_type = 1
+button_1_text = "Capped FPS"
+button_1_tooltip = "If enabled; causes your FPS to be capped at 30, otherwise it is unlimited."
+button_2_on = true
+button_2_type = 1
+button_2_text = "Frame Efficiency"
+button_2_tooltip = "If enabled; if the prior frame is the same as the current frame, instead of drawing a new frame the old one is used instead, potentially saving on computer recources. "
+
+[node name="Help" type="Control" parent="Camera/ScreenContainer/MasterContainer/AppBody"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Container" type="PanelContainer" parent="Camera/ScreenContainer/MasterContainer/AppBody/Help"]
+custom_minimum_size = Vector2(1820, 843)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -910.0
+offset_top = -421.5
+offset_right = 910.0
+offset_bottom = 421.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_l53ca")
+
+[node name="Container" type="HBoxContainer" parent="Camera/ScreenContainer/MasterContainer/AppBody/Help/Container"]
+layout_mode = 2
+theme_override_constants/separation = 35
+
+[node name="PageSelector" parent="Camera/ScreenContainer/MasterContainer/AppBody/Help/Container/Container" instance=ExtResource("12_6yc3s")]
+custom_minimum_size = Vector2(275, 0)
+layout_mode = 2
+button_group = SubResource("ButtonGroup_urwjy")
+selector_id = 2
+buttons = Array[String](["Passwords", "Tags", "Data", "App", "Developer"])
+
+[node name="LoadingScreen" type="Control" parent="Camera/ScreenContainer"]
+visible = false
+custom_minimum_size = Vector2(1920, 0)
+layout_mode = 2
+
+[node name="Background" type="ColorRect" parent="Camera/ScreenContainer/LoadingScreen"]
+custom_minimum_size = Vector2(1920, 1080)
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+color = Color(0, 0, 0, 1)
+
+[node name="Container" type="VBoxContainer" parent="Camera/ScreenContainer/LoadingScreen/Background"]
+custom_minimum_size = Vector2(1920, 1080)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -43.0
+offset_top = -27.0
+offset_right = 43.0
+offset_bottom = 27.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="Text" type="Label" parent="Camera/ScreenContainer/LoadingScreen/Background/Container"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 60
+text = "LOADING..."
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="LoadingBar" type="ProgressBar" parent="Camera/ScreenContainer/LoadingScreen/Background/Container"]
+custom_minimum_size = Vector2(0, 55)
+layout_mode = 2
+step = 1.0
+rounded = true
+show_percentage = false
+indeterminate = true
+editor_preview_indeterminate = false
+
+[node name="FadePlayer" type="AnimationPlayer" parent="Camera/ScreenContainer/LoadingScreen"]
+libraries = {
+"": SubResource("AnimationLibrary_kctgn")
+}
+
+[node name="NotificationContainer" type="Control" parent="Camera/ScreenContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+
+[node name="PopupContainer" type="Control" parent="Camera/ScreenContainer"]
+visible = false
+custom_minimum_size = Vector2(1920, 0)
+layout_mode = 2
+
+[node name="TooltipContainer" type="Control" parent="Camera/ScreenContainer"]
+custom_minimum_size = Vector2(1920, 0)
+layout_mode = 2
+mouse_filter = 2

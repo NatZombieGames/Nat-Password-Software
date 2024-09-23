@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://dv8l1vn5xuvuh"]
+
+[ext_resource type="Script" path="res://Scripts/NotificationScene.gd" id="1_5rjos"]
+[ext_resource type="StyleBox" uid="uid://bwqg3l3i7fp2l" path="res://Other/NotificationSceneStylebox.tres" id="1_kdmp7"]
+
+[node name="NotificationScene" type="PanelContainer"]
+top_level = true
+offset_right = 163.0
+offset_bottom = 76.0
+mouse_filter = 2
+theme_override_styles/panel = ExtResource("1_kdmp7")
+script = ExtResource("1_5rjos")
+
+[node name="Text" type="Label" parent="."]
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_font_sizes/font_size = 20
+text = "Placeholder"
+horizontal_alignment = 1
+vertical_alignment = 1

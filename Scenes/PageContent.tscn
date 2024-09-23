@@ -1,0 +1,77 @@
+[gd_scene load_steps=4 format=3 uid="uid://swr8nsy32e14"]
+
+[ext_resource type="Script" path="res://Scripts/PageContent.gd" id="1_glpw1"]
+[ext_resource type="StyleBox" uid="uid://iefxjw0uk37x" path="res://Other/PageContentBackgroundStylebox.tres" id="1_r6glk"]
+[ext_resource type="StyleBox" uid="uid://ck603dqk01cfq" path="res://Other/PageContentHeaderPressedStylebox.tres" id="3_3p1f4"]
+
+[node name="PageContent" type="PanelContainer"]
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 68.0
+grow_horizontal = 2
+size_flags_horizontal = 3
+mouse_filter = 1
+theme_override_styles/panel = ExtResource("1_r6glk")
+script = ExtResource("1_glpw1")
+
+[node name="ContentContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+theme_override_constants/separation = -1
+
+[node name="Header" type="PanelContainer" parent="ContentContainer"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+mouse_filter = 2
+theme_override_styles/panel = ExtResource("3_3p1f4")
+
+[node name="Button" type="Button" parent="ContentContainer/Header"]
+unique_name_in_owner = true
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+mouse_default_cursor_shape = 2
+toggle_mode = true
+
+[node name="Title" type="Label" parent="ContentContainer/Header/Button"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 30
+text = "Title"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Separator" type="ColorRect" parent="ContentContainer"]
+custom_minimum_size = Vector2(0, 3)
+layout_mode = 2
+color = Color(0.294118, 0.294118, 0.294118, 1)
+
+[node name="BodyContainer" type="VBoxContainer" parent="ContentContainer"]
+layout_mode = 2
+
+[node name="Void" type="Panel" parent="ContentContainer/BodyContainer"]
+self_modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+
+[node name="Body" type="Label" parent="ContentContainer/BodyContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(1140, 25)
+layout_mode = 2
+size_flags_vertical = 2
+text = "Body"
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="OptionRows" type="VBoxContainer" parent="ContentContainer/BodyContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="Void2" type="Panel" parent="ContentContainer/BodyContainer"]
+self_modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(0, 5)
+layout_mode = 2
+
+[connection signal="pressed" from="ContentContainer/Header/Button" to="." method="pressed"]
