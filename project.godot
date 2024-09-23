@@ -17,6 +17,7 @@ run/main_scene="res://Scenes/Main.tscn"
 config/features=PackedStringArray("4.3", "GL Compatibility")
 boot_splash/show_image=false
 config/icon="res://Assets/SoftwareLogoCircle_1.ico"
+config/windows_native_icon="res://Assets/SoftwareLogoCircle_1.ico"
 
 [autoload]
 

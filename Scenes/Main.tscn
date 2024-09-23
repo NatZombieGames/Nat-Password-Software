@@ -18,9 +18,9 @@
 [ext_resource type="PackedScene" uid="uid://swr8nsy32e14" path="res://Scenes/PageContent.tscn" id="15_ys48v"]
 [ext_resource type="PackedScene" uid="uid://buy2fhx7cw5wv" path="res://Scenes/DataDecryptionPopup.tscn" id="17_hbhgp"]
 
-[sub_resource type="ButtonGroup" id="ButtonGroup_mi0el"]
+[sub_resource type="ButtonGroup" id="ButtonGroup_vrfya"]
 
-[sub_resource type="ButtonGroup" id="ButtonGroup_fjvtb"]
+[sub_resource type="ButtonGroup" id="ButtonGroup_8kwij"]
 allow_unpress = true
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_epeum"]
@@ -35,7 +35,7 @@ corner_radius_top_right = 15
 corner_radius_bottom_right = 15
 corner_radius_bottom_left = 15
 
-[sub_resource type="ButtonGroup" id="ButtonGroup_rto06"]
+[sub_resource type="ButtonGroup" id="ButtonGroup_4bcty"]
 
 [sub_resource type="Animation" id="Animation_cs1ou"]
 length = 0.001
@@ -121,8 +121,9 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="AppVersion" type="Label" parent="Camera/ScreenContainer/MasterContainer/HatBar"]
+custom_minimum_size = Vector2(0, 35)
 layout_mode = 2
-text = "v1"
+text = "v1.1"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -173,7 +174,7 @@ color = Color(0.196078, 0.196078, 0.196078, 1)
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 size_flags_vertical = 1
-button_group = SubResource("ButtonGroup_mi0el")
+button_group = SubResource("ButtonGroup_vrfya")
 is_self_visible = 1
 type = 1
 buttons = Array[String](["Passwords", "Tags", "App Settings", "Help"])
@@ -299,7 +300,7 @@ theme_override_constants/separation = 35
 [node name="PageSelector" parent="Camera/ScreenContainer/MasterContainer/AppBody/AppSettings/Container/Container" instance=ExtResource("12_6yc3s")]
 custom_minimum_size = Vector2(275, 0)
 layout_mode = 2
-button_group = SubResource("ButtonGroup_fjvtb")
+button_group = SubResource("ButtonGroup_8kwij")
 selector_id = 1
 buttons = Array[String](["General", "Data", "Search"])
 
@@ -376,17 +377,17 @@ layout_mode = 2
 content_id = 1
 title = "Encryption"
 body_text = "!WARNING!
-Please read the Help > Data > Encryption page before altering any of these settings, as mismanagment of these values could result in loss if your data. Altering any of these settings will also save your data after being set."
+Please read the Help > Data > Encryption page before altering any of these settings, as mismanagment of these values could result in loss of your data. Altering any of these settings will also save your data after being set."
 buttons = 2
 buttons_text = Array[String](["", ""])
-button_types = Array[int]([1, 3])
+button_types = Array[int]([1, 4])
 option_texts = Array[String](["Data Encryption", "Data Encryption Key"])
-text_tooltips = Array[String](["If enabled; When saving your data, the data will be encrypted. !WARNING! When this is enabled the key isn't saved, so you must remeber it everytime you log into the app, see the Help > Data > Encryption page for more details.", "If Data Encryption is enabled; uses this key when encrypting your data, you will have to remember this key to access your data in the future, as it isn't stored. The key must be 4 digits long with only characters ranged 1-9."])
+text_tooltips = Array[String](["If enabled; When saving your data, the data will be encrypted. !WARNING! When this is enabled the key isn't saved, so you must remeber it everytime you log into the app, see the Help > Data > Encryption page for more details.", "If Data Encryption is enabled; uses this key when encrypting your data, you will have to remember this key to access your data in the future, as it isn't stored. The key must be 4 digits long with only characters ranged 0-9."])
 tooltip_widths = Array[int]([500, 500])
 normal_button_uses_tooltips = Array[bool]([false, false])
 textboxs_use_tooltips = Array[bool]([false, false])
 normal_buttons_are_toggles = Array[bool]([false, false])
-spinbox_ranges = Array[Vector2i]([Vector2i(0, 0), Vector2i(-1, 9999)])
+spinbox_ranges = Array[Vector2i]([Vector2i(0, 0), Vector2i(0, 0)])
 button_groups = Array[ButtonGroup]([null, null])
 requires_confirmation = Array[bool]([false, true])
 
@@ -443,7 +444,7 @@ theme_override_constants/separation = 35
 [node name="PageSelector" parent="Camera/ScreenContainer/MasterContainer/AppBody/Help/Container/Container" instance=ExtResource("12_6yc3s")]
 custom_minimum_size = Vector2(275, 0)
 layout_mode = 2
-button_group = SubResource("ButtonGroup_rto06")
+button_group = SubResource("ButtonGroup_4bcty")
 selector_id = 2
 buttons = Array[String](["Passwords", "Tags", "Data", "App", "Search", "Developer"])
 
@@ -530,9 +531,9 @@ theme_override_constants/separation = 15
 [node name="PageContent" parent="Camera/ScreenContainer/MasterContainer/AppBody/Help/Container/Container/PageDisplay/ScrollContainer/PageContainer/Data" instance=ExtResource("15_ys48v")]
 layout_mode = 2
 title = "Data Managment"
-body_text = "Your data is never download ro upload over the internet, the data accessed by the programme is only used by the programme. For trust and transparency your data is available to be modified and deleted at any time, please reference the points below on how to manage your data.
+body_text = "Your data is never download or upload over the internet, the data accessed by the programme is only used by the programme during the runtime of the programme. For trust and transparency your data is available to be modified and deleted at any time, please reference the points below on how to manage your data.
 
-To manage your Password data, please see the 'Password Data' tab below, for Tag data, reference the 'Tag Data' section, and finally for User data, please reference the 'User Data' section, this sections funcionality is for all the categories of data mentioned.
+To manage your Password data, please see the 'Password Data' tab below, for Tag data, reference the 'Tag Data' section, and finally for User data, please reference the 'User Data' section, this sections functionality is for all the categories of data mentioned.
 
 To delete all of your data used by the app; be warned this will not erase the data in-memory, so if you delete your data and don't wish to save it again, make sure to hit 'No' when prompted to save before exiting the programme. If you wish to delete your data, please hit the 'Delete Data' button below.
 
@@ -558,7 +559,7 @@ requires_confirmation = Array[bool]([false, false, false])
 layout_mode = 2
 content_id = 1
 title = "Password Data"
-body_text = "Your Password data is all of the data referring to your password entried, including their Names, Logins, Passwords and their associated Tags. This action is permanant, and if you wish to create a backup of your data prior to deletion, please see the section at the top of this page."
+body_text = "Your Password data is all of the data referring to your password entries, including their Names, Logins, Passwords and their associated Tags. This action is permanent, and if you wish to create a backup of your data prior to deletion, please see the section at the top of this page."
 buttons = 1
 buttons_text = Array[String](["Delete Password Data"])
 button_types = Array[int]([0])
@@ -576,7 +577,7 @@ requires_confirmation = Array[bool]([false])
 layout_mode = 2
 content_id = 2
 title = "Tag Data"
-body_text = "Your Tag data is all of the data referring to your tag entries, including their Names and their associated Passwords. This action is permanant, and if you wish to create a backup of your data prior to deletion, please see the section at the top of this page."
+body_text = "Your Tag data is all of the data referring to your tag entries, including their Names and their associated Passwords. This action is permanent, and if you wish to create a backup of your data prior to deletion, please see the section at the top of this page."
 buttons = 1
 buttons_text = Array[String](["Delete Tag Data"])
 button_types = Array[int]([0])
@@ -594,7 +595,7 @@ requires_confirmation = Array[bool]([false])
 layout_mode = 2
 content_id = 3
 title = "User Data"
-body_text = "Your User data is all of the data referring to the programmes configuration, including Settings, Programme Usage Information and Alphabet. This action is permanant, and if you wish to create a backup of your data prior to deletion, please see the section at the top of this page."
+body_text = "Your User data is all of the data referring to the programmes configuration, including Settings, Programme Usage Information and Alphabet. This action is permanent, and if you wish to create a backup of your data prior to deletion, please see the section at the top of this page."
 buttons = 1
 buttons_text = Array[String](["Delete User Data"])
 button_types = Array[int]([0])
@@ -614,7 +615,7 @@ content_id = 4
 title = "Encryption"
 body_text = "Inside App Settings > Data is an option to enable encryption for your saved data, this will cause your written Password and Tag data to be ran through the apps built-in encryption algorithm before being saved, this is done using a key set in the app settings. If the app detects encryption to be enabled when opening then it will prompt you with the key you wish to use to decrypt your data.
 
-This key you provide when prompted on login must be the exact same as the one you set when you encrypted the data, otherwise your data will be unrecoverable until you provide the correct key. So it is critical to remember the key used when trying to open the app again, if the app still detects the data as encrypted after using the provided key, it will tell the user the prompt was invalid, before giving them a button to quit the programme or to try again - after 3 failed attempts the app will close itself.
+This key - A set of 4 numbers ranged 0-9 - you provide when prompted on login must be the exact same as the one you set when you encrypted the data, otherwise your data will be unrecoverable until you provide the correct key. So it is critical to remember the key used when trying to open the app again, if the app still detects the data as encrypted after using the provided key, it will tell the user the prompt was invalid, before giving them a button to quit the programme or to try again - after 3 failed attempts the app will close itself.
 
 Enabling encryption for your active data will not encrypt future backups. If you enable encryption;  it is reccomend to keep a backup of your data prior to enabling encryption incase of the key being forgotten, remember; the key is not saved within the user data file, unlike the setting for encryption itself, when launching the app after decrypting the data the key inside settings is set to the inputted key during data decryption."
 
@@ -697,7 +698,7 @@ layout_mode = 2
 title = "Project Source"
 body_text = "This app is open-source, therefor the project files for this programme are freely available for you to modify and redistribute.
 
-If you would like to go to where the project source files are, please follow this link: https://github.com/NatZombieGames/NatPasswordProgramme 
+If you would like to go to where the project source files are, please follow this link: https://github.com/NatZombieGames/Nat-Password-Software
 Above is where you can download the project source files, and are then free to modify and reupload as you please.
 This application is created via the Godot game engine, using version 4.3, and programmed using GD-Script, not C#. The file structure for the project files is as follows:
 

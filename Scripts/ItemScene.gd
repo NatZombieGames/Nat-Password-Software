@@ -37,5 +37,6 @@ func pressed(_event : InputEvent) -> void:
 		await %PressedTimer.timeout
 		set_panel(int(str(get_viewport().gui_get_hovered_control().get_path()) == (str($".".get_path()) + "/Button/Container")))
 	elif Input.is_action_just_pressed("RClick") and main.main_page == 0:
+		DisplayServer.clipboard_set(DataManager.passwords_data[data_index]["password"])
 		main.callv("create_notification", [" Password '" + str(DataManager.passwords_data[data_index]["password"]) + "' Copied To Clipboard", 0.25])
 	return

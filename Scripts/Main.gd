@@ -123,7 +123,7 @@ func receive_window_control_buttons(btn_id : int) -> void:
 func set_infopanel(set_visibility_to : bool = true) -> void:
 	var panel : PanelContainer = [%Passwords/Panel/Container/InfoPanel, %Tags/Panel/Container/InfoPanel][main_page]
 	if set_visibility_to == false:
-		panel.set_deferred("visible", set_visibility_to)
+		panel.set_deferred("visible", false)
 		return
 	panel.call_deferred("set_paramaters", active_data)
 	return
@@ -152,9 +152,9 @@ func page_content_value_altered(page_id : int, id : int, value : Variant) -> voi
 				if id == 0:
 					DataManager.user_data["encryption"] = value
 				elif id == 1:
-					var conditions : Array[bool] = [not "0" in str(value), not "-" in str(value), len(str(value)) == 4]
+					var conditions : Array[bool] = [str(value).is_valid_int(), not "-" in str(value), not "+" in str(value), len(str(value)) == 4]
 					if false in conditions:
-						value = "1111"
+						value = "0000"
 						%AppSettings/Container/Container/PageDisplay/Data/PageContent2.call_deferred("update_button_value", 1, "1111")
 					DataManager.decryption_key = str(value)
 				if len(DataManager.decryption_key) != 4:
@@ -210,17 +210,21 @@ func receive_add_entry_pressed(id : int) -> void:
 			active_data = DataManager.passwords_data[-1]
 			active_data["index"] = len(DataManager.passwords_data)-1
 			set_infopanel()
+			await get_tree().process_frame
+			%Passwords/Panel/Container/InfoPanel.callv("change_edit_mode", [0, true])
 		elif main_page == 1:
 			DataManager.tag_data.append({"name": ("NewTag" + random_numbers(5)), "used_by": []})
 			active_data = DataManager.tag_data[-1]
 			active_data["index"] = len(DataManager.tag_data)-1
 			set_infopanel()
+			await get_tree().process_frame
+			%Tags/Panel/Container/InfoPanel.callv("change_edit_mode", [0, true])
 	elif id == -2:
-		%Passwords/Panel/Container/InfoPanel.call_deferred("create_popup_searchbox")
+		[%Passwords/Panel/Container/InfoPanel, %Tags/Panel/Container/InfoPanel][main_page].call_deferred("create_popup_searchbox")
 	else:
 		var item_set : String = ["tags", "used_by"][main_page]
-		%Passwords/Panel/Container/SearchElement/Container/SearchBox.set_deferred("text", str("#" + active_data[item_set][id]))
-		%Passwords/Panel/Container/SearchElement.call_deferred("search", str("#" + active_data[item_set][id]))
+		[%Passwords/Panel/Container/SearchElement/Container/SearchBox, %Tags/Panel/Container/SearchElement/Container/SearchBox][main_page].set_deferred("text", str("#" + active_data[item_set][id]))
+		[%Passwords/Panel/Container/SearchElement, %Tags/Panel/Container/SearchElement][main_page].call_deferred("search", str("#" + active_data[item_set][id]))
 	return
 
 func receive_add_entry_remove_pressed(id : int) -> void:

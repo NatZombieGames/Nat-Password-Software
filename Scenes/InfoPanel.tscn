@@ -399,20 +399,35 @@ custom_minimum_size = Vector2(3, 0)
 layout_mode = 2
 
 [node name="OptionsList" type="VBoxContainer" parent="ScrollContainer/Container/PasswordGenerationContainer/Row4"]
+custom_minimum_size = Vector2(0, 289)
 layout_mode = 2
 size_flags_horizontal = 0
 theme_override_constants/separation = 10
 
-[node name="SpecialCharactersSetting" parent="ScrollContainer/Container/PasswordGenerationContainer/Row4/OptionsList" instance=ExtResource("14_j6ows")]
+[node name="SpecialContainer" type="Control" parent="ScrollContainer/Container/PasswordGenerationContainer/Row4/OptionsList"]
+custom_minimum_size = Vector2(0, 60)
 layout_mode = 2
+
+[node name="SpecialCharactersSetting" parent="ScrollContainer/Container/PasswordGenerationContainer/Row4/OptionsList/SpecialContainer" instance=ExtResource("14_j6ows")]
+layout_mode = 2
+offset_top = 10.0
+offset_right = 160.0
+offset_bottom = 58.0
 run_set_on_ready = true
 button_type = 1
 default_text = "Atleast 1 Special Character"
 text_tooltip = "If enabled; your generated password will contain >=1 Special character."
 tooltip_width = 500
 
-[node name="UpperCaseSetting" parent="ScrollContainer/Container/PasswordGenerationContainer/Row4/OptionsList" instance=ExtResource("14_j6ows")]
+[node name="UpperContainer" type="Control" parent="ScrollContainer/Container/PasswordGenerationContainer/Row4/OptionsList"]
+custom_minimum_size = Vector2(0, 60)
 layout_mode = 2
+
+[node name="UpperCaseSetting" parent="ScrollContainer/Container/PasswordGenerationContainer/Row4/OptionsList/UpperContainer" instance=ExtResource("14_j6ows")]
+layout_mode = 2
+offset_top = 10.0
+offset_right = 160.0
+offset_bottom = 58.0
 run_set_on_ready = true
 default_id = 1
 button_type = 1
@@ -420,8 +435,15 @@ default_text = "Atleast 1 Upper-Case Character"
 text_tooltip = "If enabled; your generated password will contain >=1 UpperCase (Capital) character."
 tooltip_width = 500
 
-[node name="LowerCaseSetting" parent="ScrollContainer/Container/PasswordGenerationContainer/Row4/OptionsList" instance=ExtResource("14_j6ows")]
+[node name="LowerContainer" type="Control" parent="ScrollContainer/Container/PasswordGenerationContainer/Row4/OptionsList"]
+custom_minimum_size = Vector2(0, 60)
 layout_mode = 2
+
+[node name="LowerCaseSetting" parent="ScrollContainer/Container/PasswordGenerationContainer/Row4/OptionsList/LowerContainer" instance=ExtResource("14_j6ows")]
+layout_mode = 2
+offset_top = 10.0
+offset_right = 160.0
+offset_bottom = 58.0
 run_set_on_ready = true
 default_id = 2
 button_type = 1
@@ -429,8 +451,15 @@ default_text = "Atleast 1 Lower-Case Character"
 text_tooltip = "If enabled; your generated password will contain >=1 LowerCase character."
 tooltip_width = 500
 
-[node name="NumberSetting" parent="ScrollContainer/Container/PasswordGenerationContainer/Row4/OptionsList" instance=ExtResource("14_j6ows")]
+[node name="NumberContainer" type="Control" parent="ScrollContainer/Container/PasswordGenerationContainer/Row4/OptionsList"]
+custom_minimum_size = Vector2(0, 60)
 layout_mode = 2
+
+[node name="NumberSetting" parent="ScrollContainer/Container/PasswordGenerationContainer/Row4/OptionsList/NumberContainer" instance=ExtResource("14_j6ows")]
+layout_mode = 2
+offset_top = 10.0
+offset_right = 160.0
+offset_bottom = 58.0
 run_set_on_ready = true
 default_id = 3
 button_type = 1

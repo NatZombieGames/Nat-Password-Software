@@ -16,8 +16,8 @@ func show_error(text : String) -> void:
 
 func handle_buttons(id : int) -> void:
 	if id == 0:
-		var conditions : Array[bool] = [str(%KeyEntryBox.text).is_valid_int(), "+" not in %KeyEntryBox.text, "-" not in %KeyEntryBox.text, "0" not in %KeyEntryBox.text, len(%KeyEntryBox.text) == 4]
-		var error_responses : Array[String] = ["ERROR: Not All Characters Are Numeric.", "ERROR: '+' In Key.", "ERROR: '-' In Key.", "ERROR: Zero In Key", "ERROR: Invalid Text Length."]
+		var conditions : Array[bool] = [str(%KeyEntryBox.text).is_valid_int(), "+" not in %KeyEntryBox.text, "-" not in %KeyEntryBox.text, len(%KeyEntryBox.text) == 4]
+		var error_responses : Array[String] = ["ERROR: Not All Characters Are Numeric.", "ERROR: '+' In Key.", "ERROR: '-' In Key.", "ERROR: Invalid Text Length."]
 		if false in conditions:
 			show_error(error_responses[conditions.find(false)])
 		else:

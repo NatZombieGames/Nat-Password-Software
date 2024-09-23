@@ -8,29 +8,29 @@ const con2_to_con1 : Array[String] = ["a" , "b" , "c" , "d" , "e" , "f" , "g" , 
 func encrypt(input_string : String, key : String) -> String:
 	var to_return : String = input_string
 	to_return = str_to_bin(to_return)
-	if ((int(key[0]) + int(key[1]) + int(key[2]) + int(key[3])) % 2) == 0:
+	if (((int(key[0]) + int(key[1]) + int(key[2]) + int(key[3])) + 1) % 2) == 0:
 		to_return = bit_flip(to_return)
 	for i in range(0, ((int(key[1]) * int(key[3])) % 10)):
-		to_return = bit_shift(to_return, (int(key[0]) * int(key[3])), 0)
+		to_return = bit_shift(to_return, ((int(key[0]) * int(key[3])) + 1), 0)
 	for i in range(0, ((int(key[2]) * int(key[3])) % 10)):
-		to_return = bit_shift(to_return, (int(key[1]) * int(key[3])), 0)
+		to_return = bit_shift(to_return, ((int(key[1]) * int(key[3])) + 1), 0)
 		to_return = bit_reversal(to_return)
 	to_return = bit_crunch(to_return, 0)
-	if ((int(key[0]) + int(key[1]) + int(key[2])) * int(key[3]) % 2) == 0:
+	if (((int(key[0]) + int(key[1]) + int(key[2]) * int(key[3])) + 1) % 2) == 0:
 		to_return = to_return.reverse()
 	return to_return
 
 func decrypt(input_string : String, key : String) -> String:
 	var to_return : String = input_string
-	if ((int(key[0]) + int(key[1]) + int(key[2])) * int(key[3]) % 2) == 0:
+	if (((int(key[0]) + int(key[1]) + int(key[2]) * int(key[3])) + 1) % 2) == 0:
 		to_return = to_return.reverse()
 	to_return = bit_crunch(to_return, 1)
 	for i in range(0, ((int(key[2]) * int(key[3])) % 10)):
 		to_return = bit_reversal(to_return)
-		to_return = bit_shift(to_return, (int(key[1]) * int(key[3])), 1)
+		to_return = bit_shift(to_return, ((int(key[1]) * int(key[3])) + 1), 1)
 	for i in range(0, ((int(key[1]) * int(key[3])) % 10)):
-		to_return = bit_shift(to_return, (int(key[0]) * int(key[3])), 1)
-	if ((int(key[0]) + int(key[1]) + int(key[2]) + int(key[3])) % 2) == 0:
+		to_return = bit_shift(to_return, ((int(key[0]) * int(key[3])) + 1), 1)
+	if (((int(key[0]) + int(key[1]) + int(key[2]) + int(key[3])) + 1) % 2) == 0:
 		to_return = bit_flip(to_return)
 	to_return = bin_to_str(to_return)
 	return to_return

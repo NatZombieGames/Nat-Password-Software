@@ -16,13 +16,15 @@ var active_data : Dictionary
 func _ready() -> void:
 	$".".set_deferred("visible", false)
 	for item in %PasswordGenerationContainer/Row4/OptionsList.get_children():
-		item.set_deferred("parent", $".".get_path())
+		item.get_child(0).set_deferred("parent", $".".get_path())
 	for item in [%PasswordContainer, %PasswordGenerationContainer, %LoginContainer, $ScrollContainer/Container/Separator4, $ScrollContainer/Container/Separator5]:
 		item.set_deferred("visible", type == 0)
 	return
 
 func set_paramaters(new_active_data : Dictionary) -> void:
 	active_data = new_active_data
+	for i in range(0, 2):
+		change_edit_mode(i, false)
 	%TitleContainer/EditTitleField.set_deferred("text", active_data["name"])
 	%TitleContainer/EditTitleField.set_deferred("placeholder_text", active_data["name"])
 	%TitleContainer/Title.set_deferred("text", active_data["name"])
@@ -52,6 +54,9 @@ func generate_password() -> void:
 	var characters : Array[String]
 	var paramater_to_case : Array[String] = [DataManager.user_data["alphabet"]["special"], DataManager.user_data["alphabet"]["uppercase"], DataManager.user_data["alphabet"]["lowercase"], DataManager.user_data["alphabet"]["number"]]
 	var character_set : String
+	for item in paramater_to_case:
+		if len(item) < 1:
+			paramater_to_case[paramater_to_case.find(item)] = "N"
 	for i in range(0, 4):
 		if password_generation_paramaters[i] == true:
 			character_set = paramater_to_case[i]
@@ -170,6 +175,7 @@ func receive_popup_searchbox_data(popup_data : Dictionary) -> void:
 	return
 
 func copy_password() -> void:
+	DisplayServer.clipboard_set(active_data["password"])
 	main.callv("create_notification", [" Password '" + str(active_data["password"]) + "' Copied To Clipboard", 0.25])
 	return
 
