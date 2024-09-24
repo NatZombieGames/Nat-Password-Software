@@ -52,16 +52,17 @@ func search(query : String) -> void:
 				item_set = "password"
 		if special_search:
 			query = query.substr(1, -1)
-		if item_set == ["tags", "used_by"][type]:
-			for item in data_set:
-				for item2 in item[item_set]:
-					if [query in item2, query == item2][int(strict_search)]:
+		if len(search_data) < 1:
+			if item_set == ["tags", "used_by"][type]:
+				for item in data_set:
+					for item2 in item[item_set]:
+						if [query in item2, query == item2][int(strict_search)]:
+							search_data.append(data_set.find(item))
+							break
+			else:
+				for item in data_set:
+					if [query in item[item_set], query == item[item_set]][int(strict_search)]:
 						search_data.append(data_set.find(item))
-						break
-		else:
-			for item in data_set:
-				if [query in item[item_set], query == item[item_set]][int(strict_search)]:
-					search_data.append(data_set.find(item))
 		for item in %ResultList.get_children():
 			item.queue_free()
 		var active_data_set : Array[Dictionary] = [DataManager.passwords_data, DataManager.tag_data][type]
