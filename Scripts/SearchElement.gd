@@ -57,6 +57,7 @@ func search(query : String) -> void:
 				for item2 in item[item_set]:
 					if [query in item2, query == item2][int(strict_search)]:
 						search_data.append(data_set.find(item))
+						break
 		else:
 			for item in data_set:
 				if [query in item[item_set], query == item[item_set]][int(strict_search)]:
