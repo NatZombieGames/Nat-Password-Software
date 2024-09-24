@@ -55,12 +55,13 @@ func generate_password() -> void:
 	var paramater_to_case : Array[String] = [DataManager.user_data["alphabet"]["special"], DataManager.user_data["alphabet"]["uppercase"], DataManager.user_data["alphabet"]["lowercase"], DataManager.user_data["alphabet"]["number"]]
 	while "" in paramater_to_case:
 		paramater_to_case[paramater_to_case.find("")] = "N"
-	for i in range(0, length-len(characters)):
-		characters.append(get_random(paramater_to_case.pick_random()))
 	if true in password_generation_paramaters:
 		for i in range(0, 4):
 			if password_generation_paramaters[i] == true:
 				characters.append(get_random(paramater_to_case[i]))
+	for i in range(0, length-len(characters)):
+		characters.append(get_random(paramater_to_case.pick_random()))
+	if true in password_generation_paramaters:
 		characters.shuffle()
 	for item in characters:
 		to_return += item
