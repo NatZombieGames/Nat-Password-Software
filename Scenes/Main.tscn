@@ -18,9 +18,9 @@
 [ext_resource type="PackedScene" uid="uid://swr8nsy32e14" path="res://Scenes/PageContent.tscn" id="15_ys48v"]
 [ext_resource type="PackedScene" uid="uid://buy2fhx7cw5wv" path="res://Scenes/DataDecryptionPopup.tscn" id="17_hbhgp"]
 
-[sub_resource type="ButtonGroup" id="ButtonGroup_qgt1j"]
+[sub_resource type="ButtonGroup" id="ButtonGroup_8cnjw"]
 
-[sub_resource type="ButtonGroup" id="ButtonGroup_d3hb4"]
+[sub_resource type="ButtonGroup" id="ButtonGroup_1dqf7"]
 allow_unpress = true
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_epeum"]
@@ -35,7 +35,7 @@ corner_radius_top_right = 15
 corner_radius_bottom_right = 15
 corner_radius_bottom_left = 15
 
-[sub_resource type="ButtonGroup" id="ButtonGroup_sjl2n"]
+[sub_resource type="ButtonGroup" id="ButtonGroup_a5rl3"]
 
 [sub_resource type="Animation" id="Animation_cs1ou"]
 length = 0.001
@@ -174,7 +174,7 @@ color = Color(0.196078, 0.196078, 0.196078, 1)
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 size_flags_vertical = 1
-button_group = SubResource("ButtonGroup_qgt1j")
+button_group = SubResource("ButtonGroup_8cnjw")
 is_self_visible = 1
 type = 1
 buttons = Array[String](["Passwords", "Tags", "App Settings", "Help"])
@@ -300,7 +300,7 @@ theme_override_constants/separation = 35
 [node name="PageSelector" parent="Camera/ScreenContainer/MasterContainer/AppBody/AppSettings/Container/Container" instance=ExtResource("12_6yc3s")]
 custom_minimum_size = Vector2(275, 0)
 layout_mode = 2
-button_group = SubResource("ButtonGroup_d3hb4")
+button_group = SubResource("ButtonGroup_1dqf7")
 selector_id = 1
 buttons = Array[String](["General", "Data", "Search"])
 
@@ -382,7 +382,7 @@ buttons = 2
 buttons_text = Array[String](["", ""])
 button_types = Array[int]([1, 4])
 option_texts = Array[String](["Data Encryption", "Data Encryption Key"])
-text_tooltips = Array[String](["If enabled; When saving your data, the data will be encrypted. !WARNING! When this is enabled the key isn't saved, so you must remeber it everytime you log into the app, see the Help > Data > Encryption page for more details.", "If Data Encryption is enabled; uses this key when encrypting your data, you will have to remember this key to access your data in the future, as it isn't stored. The key must be 4 digits long with only characters ranged 0-9."])
+text_tooltips = Array[String](["If enabled; When saving your data, the data will be encrypted. !WARNING! When this is enabled the key isn't saved, so you must remeber it everytime you log into the app, see the Help > Data > Encryption page for more details.", "If Data Encryption is enabled; uses this key when encrypting your data, you will have to remember this key to access your data in the future, as it isn't stored. The key must be 4 digits long with only characters ranged 1-9."])
 tooltip_widths = Array[int]([500, 500])
 normal_button_uses_tooltips = Array[bool]([false, false])
 textboxs_use_tooltips = Array[bool]([false, false])
@@ -444,7 +444,7 @@ theme_override_constants/separation = 35
 [node name="PageSelector" parent="Camera/ScreenContainer/MasterContainer/AppBody/Help/Container/Container" instance=ExtResource("12_6yc3s")]
 custom_minimum_size = Vector2(275, 0)
 layout_mode = 2
-button_group = SubResource("ButtonGroup_sjl2n")
+button_group = SubResource("ButtonGroup_a5rl3")
 selector_id = 2
 buttons = Array[String](["Passwords", "Tags", "Data", "App", "Search", "Developer"])
 
@@ -615,7 +615,7 @@ content_id = 4
 title = "Encryption"
 body_text = "Inside App Settings > Data is an option to enable encryption for your saved data, this will cause your written Password and Tag data to be ran through the apps built-in encryption algorithm before being saved, this is done using a key set in the app settings. If the app detects encryption to be enabled when opening then it will prompt you with the key you wish to use to decrypt your data.
 
-This key - A set of 4 numbers ranged 0-9 - you provide when prompted on login must be the exact same as the one you set when you encrypted the data, otherwise your data will be unrecoverable until you provide the correct key. So it is critical to remember the key used when trying to open the app again, if the app still detects the data as encrypted after using the provided key, it will tell the user the prompt was invalid, before giving them a button to quit the programme or to try again - after 3 failed attempts the app will close itself.
+This key - A set of 4 numbers ranged 1-9 - you provide when prompted on login must be the exact same as the one you set when you encrypted the data, otherwise your data will be unrecoverable until you provide the correct key. So it is critical to remember the key used when trying to open the app again, if the app still detects the data as encrypted after using the provided key, it will tell the user the prompt was invalid, before giving them a button to quit the programme or to try again - after 3 failed attempts the app will close itself.
 
 Enabling encryption for your active data will not encrypt future backups. If you enable encryption;  it is reccomend to keep a backup of your data prior to enabling encryption incase of the key being forgotten, remember; the key is not saved within the user data file, unlike the setting for encryption itself, when launching the app after decrypting the data the key inside settings is set to the inputted key during data decryption."
 

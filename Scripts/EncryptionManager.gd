@@ -10,9 +10,9 @@ func encrypt(input_string : String, key : String) -> String:
 	to_return = str_to_bin(to_return)
 	if (((int(key[0]) + int(key[1]) + int(key[2]) + int(key[3])) + 1) % 2) == 0:
 		to_return = bit_flip(to_return)
-	for i in range(0, ((int(key[1]) * int(key[3])) % 10)):
+	for i in range(0, (((int(key[1]) * int(key[3])) + 1) % 10)):
 		to_return = bit_shift(to_return, ((int(key[0]) * int(key[3])) + 1), 0)
-	for i in range(0, ((int(key[2]) * int(key[3])) % 10)):
+	for i in range(0, (((int(key[2]) * int(key[3])) + 1) % 10)):
 		to_return = bit_shift(to_return, ((int(key[1]) * int(key[3])) + 1), 0)
 		to_return = bit_reversal(to_return)
 	to_return = bit_crunch(to_return, 0)
@@ -25,10 +25,10 @@ func decrypt(input_string : String, key : String) -> String:
 	if (((int(key[0]) + int(key[1]) + int(key[2]) * int(key[3])) + 1) % 2) == 0:
 		to_return = to_return.reverse()
 	to_return = bit_crunch(to_return, 1)
-	for i in range(0, ((int(key[2]) * int(key[3])) % 10)):
+	for i in range(0, (((int(key[2]) * int(key[3])) + 1) % 10)):
 		to_return = bit_reversal(to_return)
 		to_return = bit_shift(to_return, ((int(key[1]) * int(key[3])) + 1), 1)
-	for i in range(0, ((int(key[1]) * int(key[3])) % 10)):
+	for i in range(0, (((int(key[1]) * int(key[3])) + 1) % 10)):
 		to_return = bit_shift(to_return, ((int(key[0]) * int(key[3])) + 1), 1)
 	if (((int(key[0]) + int(key[1]) + int(key[2]) + int(key[3])) + 1) % 2) == 0:
 		to_return = bit_flip(to_return)

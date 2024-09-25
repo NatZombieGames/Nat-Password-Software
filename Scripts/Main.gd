@@ -19,7 +19,8 @@ func _ready() -> void:
 	DisplayServer.cursor_set_shape(DisplayServer.CURSOR_BUSY)
 	#
 	set_decryption_screen(false)
-	await DataManager.call_deferred("read_data")
+	DataManager.call_deferred("read_data")
+	await DataManager.finished_read
 	await get_tree().process_frame
 	update_main_page(0)
 	update_settings_page(0)
