@@ -107,7 +107,7 @@ func receive_popup_responses(popup_id : int, button_id : int) -> void:
 			change_edit_mode(0, true)
 	elif popup_id == 1:
 		if button_id == 0:
-			if %TitleContainer/EditTitleField.text not in banned_item_names and %TitleContainer/EditTitleField.text[0] not in banned_item_name_starters:
+			if %TitleContainer/EditTitleField.text != "" and %TitleContainer/EditTitleField.text not in banned_item_names and %TitleContainer/EditTitleField.text[0] not in banned_item_name_starters:
 				var data_set : Array[Dictionary] = [DataManager.tag_data, DataManager.passwords_data][main.main_page]
 				var item_set : String = ["used_by", "tags"][main.main_page]
 				for item in data_set:
@@ -124,7 +124,7 @@ func receive_popup_responses(popup_id : int, button_id : int) -> void:
 			change_edit_mode(2, true)
 	elif popup_id == 4:
 		if button_id == 0:
-			if %PasswordGenerationContainer/Row1/NewPasswordField.text not in banned_item_names and %PasswordGenerationContainer/Row1/NewPasswordField.text[0] not in banned_item_name_starters:
+			if %PasswordGenerationContainer/Row1/NewPasswordField.text != "" and %PasswordGenerationContainer/Row1/NewPasswordField.text not in banned_item_names and %PasswordGenerationContainer/Row1/NewPasswordField.text[0] not in banned_item_name_starters:
 				DataManager.passwords_data[active_data["index"]]["password"] = %PasswordGenerationContainer/Row1/NewPasswordField.text
 				active_data["password"] = %PasswordGenerationContainer/Row1/NewPasswordField.text
 				%PasswordContainer/PasswordDisplay.text = %PasswordGenerationContainer/Row1/NewPasswordField.text
@@ -136,7 +136,7 @@ func receive_popup_responses(popup_id : int, button_id : int) -> void:
 			change_edit_mode(1, true)
 	elif popup_id == 6:
 		if button_id == 0:
-			if %LoginContainer/EditLoginField.text not in banned_item_names and %LoginContainer/EditLoginField.text[0] not in banned_item_name_starters:
+			if %LoginContainer/EditLoginField.text != "" and %LoginContainer/EditLoginField.text not in banned_item_names and %LoginContainer/EditLoginField.text[0] not in banned_item_name_starters:
 				DataManager.passwords_data[active_data["index"]]["login"] = %LoginContainer/EditLoginField.text
 				active_data["login"] = %LoginContainer/EditLoginField.text
 				%LoginContainer/Title.text = %LoginContainer/EditLoginField.text
@@ -153,10 +153,16 @@ func receive_edit_buttons(button_type : int, id : int) -> void:
 	var closing_popups_id : Array[int] = [1, 6, 4]
 	var edit_mode_id : Array[int] = [0, 1, 2]
 	if id == 0:
-		main.callv("create_popup", [opening_popups_text[button_type], opening_popups_id[button_type], [" Yes ", " No "]])
+		if DataManager.user_data["edit_popups"] == true:
+			main.callv("create_popup", [opening_popups_text[button_type], opening_popups_id[button_type], [" Yes ", " No "]])
+		else:
+			receive_popup_responses(opening_popups_id[button_type], 0)
 	elif id == 1:
 		if if_statement[button_type] == true:
-			main.callv("create_popup", [closing_popups_text[button_type], closing_popups_id[button_type], [" Yes ", " No "]])
+			if DataManager.user_data["edit_popups"] == true:
+				main.callv("create_popup", [closing_popups_text[button_type], closing_popups_id[button_type], [" Yes ", " No "]])
+			else:
+				receive_popup_responses(closing_popups_id[button_type], 0)
 		else:
 			change_edit_mode(edit_mode_id[button_type], false)
 	return

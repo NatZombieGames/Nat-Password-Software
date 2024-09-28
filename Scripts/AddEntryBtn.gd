@@ -31,7 +31,7 @@ func main_pressed() -> void:
 	create_stylebox(2)
 	%PressedTimer.start(0.12)
 	await %PressedTimer.timeout
-	create_stylebox(1)
+	create_stylebox(int(str(get_viewport().gui_get_hovered_control().get_path()) == str(str(self.get_path()) + "/Background/Container")))
 	return
 
 func remove_pressed() -> void:

@@ -59,6 +59,7 @@ func apply_user_settings(type : String) -> void:
 		var search_content_1 : PanelContainer = %AppSettings/Container/Container/PageDisplay/Search/PageContent
 		general_content_1.call_deferred("update_button_value", 0, DataManager.user_data["fpscapped"])
 		general_content_1.call_deferred("update_button_value", 1, DataManager.user_data["frame_efficiency"])
+		general_content_1.call_deferred("update_button_value", 2, DataManager.user_data["edit_popups"])
 		var num_to_key : Array[String] = ["special", "uppercase", "lowercase", "number"]
 		for i in range(0, 4):
 			general_content_2.call_deferred("update_button_value", i, DataManager.user_data["alphabet"][num_to_key[i]])
@@ -142,7 +143,7 @@ func page_content_value_altered(page_id : int, id : int, value : Variant) -> voi
 	if main_page == 2:
 		if settings_page == 0:
 			if page_id == 0:
-				DataManager.user_data[["fpscapped", "frame_efficiency"][id]] = value
+				DataManager.user_data[["fpscapped", "frame_efficiency", "edit_popups"][id]] = value
 			elif page_id == 1:
 				var id_to_key : Array[String] = ["special", "uppercase", "lowercase", "number"]
 				DataManager.user_data["alphabet"][id_to_key[id]] = value

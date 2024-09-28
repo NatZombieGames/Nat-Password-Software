@@ -98,7 +98,15 @@ func create_add_entry(title : String, parent_path : String) -> void:
 	return
 
 func receive_add_entry_pressed(id : int) -> void:
-	get_node(parent).call_deferred("receive_add_entry_pressed", id)
+	await get_node(parent).call_deferred("receive_add_entry_pressed", id)
+	for i in range(0, 2):
+		await get_tree().process_frame
+	if have_add_entry:
+		%ResultList.get_child(-1).queue_free()
+		var item_set_len : int = len([DataManager.passwords_data, DataManager.tag_data][type])
+		var item_set : Dictionary = [DataManager.passwords_data, DataManager.tag_data][type][-1]
+		add_search_item(item_set["name"], item_set[["tags", "used_by"][type]], (item_set_len-1))
+		create_add_entry(["Create New Password Entry", "Create New Tag"][type], $".".get_path())
 	return
 
 func add_search_item(item_name : String, tags : Array, id : int) -> void:

@@ -10,7 +10,7 @@ extends Node
 @export var decryption_key : String
 @export var succesfully_read_data : bool = false
 @export var remaining_read_attempts : int = 3
-const default_user_data : Dictionary = {"alphabet": {"special": "!?@#£$%&(){}[]<>^|':;", "uppercase": "ABCDEFGHIJKLMNOPQRSTUVWXYZ", "lowercase": "abcdefghijklmnopqrstuvwxyz", "number": "0123456789"}, "autosave": false, "autosave_interval": 1, "autobackup": false, "autobackup_interval": 1, "lastopened": 0, "encryption": false, "case_sensative_search": true, "strict_search": true, "fpscapped": true, "frame_efficiency": false}
+const default_user_data : Dictionary = {"alphabet": {"special": "!?@#£$%&(){}[]<>^|':;", "uppercase": "ABCDEFGHIJKLMNOPQRSTUVWXYZ", "lowercase": "abcdefghijklmnopqrstuvwxyz", "number": "0123456789"}, "autosave": false, "autosave_interval": 1, "autobackup": false, "autobackup_interval": 1, "lastopened": 0, "encryption": false, "case_sensative_search": true, "strict_search": true, "fpscapped": true, "frame_efficiency": false, "edit_popups": true}
 signal finished_read
 
 func pause_app(state : bool) -> void:
@@ -30,6 +30,10 @@ func read_data() -> void:
 			user_data[item] = opened_user_data.get_value("data", item)
 	if user_data == {}:
 		user_data = default_user_data.duplicate(true)
+	else:
+		for item in default_user_data.keys():
+			if user_data.get(item, null) == null:
+				user_data[item] = default_user_data[item]
 	#
 	var data_exists : bool = DirAccess.dir_exists_absolute(app_path + "/NPS_Data")
 	var passwords_path : String = str(app_path + "/NPS_Data/Passwords.ini")

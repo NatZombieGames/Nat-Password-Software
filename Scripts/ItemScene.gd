@@ -5,7 +5,7 @@ extends PanelContainer
 @onready var hovered_panel : StyleBoxFlat = preload("res://Other/ItemSceneHoveredStylebox.tres")
 @onready var pressed_panel : StyleBoxFlat = preload("res://Other/ItemScenePressedStylebox.tres")
 @export var to_send_pressed_data : String = "/root/Main"
-var data_index : int
+@export var data_index : int
 var active_infopanel : PanelContainer
 
 func _ready() -> void:
