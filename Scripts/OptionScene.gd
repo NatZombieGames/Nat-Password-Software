@@ -67,6 +67,10 @@ func set_button_state(new_state : Variant) -> void:
 	send_output = true
 	return
 
+func hovered(state : bool) -> void:
+	get_node("/root/Main").call_deferred("tooltip_control", state, text_tooltip, tooltip_width)
+	return
+
 func pressed() -> void:
 	if send_output:
 		if button_type == 3:
@@ -75,10 +79,6 @@ func pressed() -> void:
 			get_node(parent).call_deferred("receive_optionscene_pressed", id, %TextBox.text)
 		else:
 			get_node(parent).call_deferred("receive_optionscene_pressed", id, buttons[button_type].button_pressed)
-	return
-
-func hovered(state : bool) -> void:
-	get_node("/root/Main").call_deferred("tooltip_control", state, text_tooltip, tooltip_width)
 	return
 
 func spinbox_pressed(_value : float = 0.0) -> void:

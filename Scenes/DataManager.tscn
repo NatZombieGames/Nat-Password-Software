@@ -5,8 +5,3 @@
 [node name="DataManager" type="Node"]
 process_mode = 3
 script = ExtResource("1_wytxs")
-
-[node name="Timer" type="Timer" parent="."]
-unique_name_in_owner = true
-process_mode = 3
-one_shot = true

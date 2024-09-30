@@ -21,7 +21,7 @@ func _ready() -> void:
 	set_decryption_screen(false)
 	DataManager.call_deferred("read_data")
 	await DataManager.finished_read
-	await get_tree().process_frame
+	await frame_pause()
 	update_main_page(0)
 	update_settings_page(0)
 	update_help_page(0)
@@ -47,6 +47,10 @@ func _unhandled_input(_event : InputEvent) -> void:
 		for item in shortcuts:
 			if Input.is_action_just_pressed(item):
 				update_main_page(shortcuts.find(item))
+	return
+
+func frame_pause() -> void:
+	await get_tree().process_frame
 	return
 
 func apply_user_settings(type : String) -> void:
@@ -207,20 +211,28 @@ func receive_popup_button_pressed(popup_id : int, btn_id : int) -> void:
 
 func receive_add_entry_pressed(id : int) -> void:
 	if id == -1:
-		if main_page == 0:
-			DataManager.passwords_data.append({"name": ("NewPasswordEntry" + random_numbers(5)), "login": "Login", "password": "Password", "tags": []})
-			active_data = DataManager.passwords_data[-1]
-			active_data["index"] = len(DataManager.passwords_data)-1
-			set_infopanel()
-			await get_tree().process_frame
-			%Passwords/Panel/Container/InfoPanel.callv("change_edit_mode", [0, true])
-		elif main_page == 1:
-			DataManager.tag_data.append({"name": ("NewTag" + random_numbers(5)), "used_by": []})
-			active_data = DataManager.tag_data[-1]
-			active_data["index"] = len(DataManager.tag_data)-1
-			set_infopanel()
-			await get_tree().process_frame
-			%Tags/Panel/Container/InfoPanel.callv("change_edit_mode", [0, true])
+		var to_append : Dictionary = [{"name": ("NewPasswordEntry" + random_numbers(10)), "login": "Login", "password": "Password", "tags": []}, {"name": ("NewTag" + random_numbers(10)), "used_by": []}][main_page]
+		var data_set : Array[Dictionary] = [DataManager.passwords_data, DataManager.tag_data][main_page]
+		data_set.append(to_append)
+		active_data = to_append
+		active_data["index"] = len(data_set)-1
+		set_infopanel()
+		await frame_pause()
+		get_node(str(["%Passwords", "%Tags"][main_page] + "/Panel/Container/InfoPanel")).callv("change_edit_mode", [0, true])
+		#if main_page == 0:
+		#	DataManager.passwords_data.append({"name": ("NewPasswordEntry" + random_numbers(10)), "login": "Login", "password": "Password", "tags": []})
+		#	active_data = DataManager.passwords_data[-1]
+		#	active_data["index"] = len(DataManager.passwords_data)-1
+		#	set_infopanel()
+		#	await frame_pause()
+		#	%Passwords/Panel/Container/InfoPanel.callv("change_edit_mode", [0, true])
+		#elif main_page == 1:
+		#	DataManager.tag_data.append({"name": ("NewTag" + random_numbers(10)), "used_by": []})
+		#	active_data = DataManager.tag_data[-1]
+		#	active_data["index"] = len(DataManager.tag_data)-1
+		#	set_infopanel()
+		#	await frame_pause()
+		#	%Tags/Panel/Container/InfoPanel.callv("change_edit_mode", [0, true])
 	elif id == -2:
 		[%Passwords/Panel/Container/InfoPanel, %Tags/Panel/Container/InfoPanel][main_page].call_deferred("create_popup_searchbox")
 	else:

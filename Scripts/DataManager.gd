@@ -11,6 +11,7 @@ extends Node
 @export var succesfully_read_data : bool = false
 @export var remaining_read_attempts : int = 3
 const default_user_data : Dictionary = {"alphabet": {"special": "!?@#£$%&(){}[]<>^|':;", "uppercase": "ABCDEFGHIJKLMNOPQRSTUVWXYZ", "lowercase": "abcdefghijklmnopqrstuvwxyz", "number": "0123456789"}, "autosave": false, "autosave_interval": 1, "autobackup": false, "autobackup_interval": 1, "lastopened": 0, "encryption": false, "case_sensative_search": true, "strict_search": true, "fpscapped": true, "frame_efficiency": false, "edit_popups": true}
+@warning_ignore("unused_signal")
 signal finished_read
 
 func pause_app(state : bool) -> void:

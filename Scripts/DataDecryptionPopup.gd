@@ -17,7 +17,7 @@ func show_error(text : String) -> void:
 func handle_buttons(id : int) -> void:
 	if id == 0:
 		var conditions : Array[bool] = [str(%KeyEntryBox.text).is_valid_int(), "+" not in %KeyEntryBox.text, "-" not in %KeyEntryBox.text, len(%KeyEntryBox.text) == 4]
-		var error_responses : Array[String] = ["ERROR: Not All Characters Are Numeric.", "ERROR: '+' In Key.", "ERROR: '-' In Key.", "ERROR: Invalid Text Length."]
+		var error_responses : Array[String] = ["ERROR: Entry Is Not A Valid Number", "ERROR: '+' In Key.", "ERROR: '-' In Key.", "ERROR: Invalid Text Length."]
 		if false in conditions:
 			show_error(error_responses[conditions.find(false)])
 		else:
@@ -28,9 +28,8 @@ func handle_buttons(id : int) -> void:
 	return
 
 func update_chances(chances : int) -> void:
-	if chances > 0:
-		%ChancesLabel.text = "Chances Remaining: " + str(chances)
-	else:
+	%ChancesLabel.text = "Chances Remaining: " + str(chances)
+	if chances < 1:
 		get_tree().quit()
 	return
 

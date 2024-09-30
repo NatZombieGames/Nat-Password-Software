@@ -4,7 +4,7 @@
 // Incrementing CACHE_VERSION will kick off the install event and force
 // previously cached resources to be updated from the network.
 /** @type {string} */
-const CACHE_VERSION = '1727688017|173883461';
+const CACHE_VERSION = '1727702839|56833752';
 /** @type {string} */
 const CACHE_PREFIX = 'Nat Password Sof-sw-cache-';
 const CACHE_NAME = CACHE_PREFIX + CACHE_VERSION;
