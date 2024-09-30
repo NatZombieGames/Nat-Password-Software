@@ -2,9 +2,9 @@
 
 [ext_resource type="Script" path="res://Scripts/AddEntryBtn.gd" id="1_81hu5"]
 [ext_resource type="StyleBox" uid="uid://cg4odcwiqmxwk" path="res://Other/AddEntryNormalStylebox.tres" id="2_f1lru"]
-[ext_resource type="Texture2D" uid="uid://bb33vcvjgbovs" path="res://Assets/RemoveIcon.png" id="2_uk14x"]
-[ext_resource type="Texture2D" uid="uid://m8aj56bksd32" path="res://Assets/RemoveIcon_Pressed.png" id="3_31p0m"]
-[ext_resource type="Texture2D" uid="uid://bx5u42o4cykec" path="res://Assets/RemoveIcon_Hovered.png" id="4_dfwnd"]
+[ext_resource type="Texture2D" uid="uid://h6jmxplpaaoo" path="res://Assets/QuitIcon.png" id="3_d6rax"]
+[ext_resource type="Texture2D" uid="uid://bpsu46emcej1p" path="res://Assets/QuitIcon_Pressed.png" id="4_osh46"]
+[ext_resource type="Texture2D" uid="uid://cmfl8j461s3sd" path="res://Assets/QuitIcon_Hovered.png" id="5_lkfpa"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_lg5s0"]
 
@@ -58,9 +58,9 @@ visible = false
 custom_minimum_size = Vector2(30, 30)
 layout_mode = 2
 mouse_default_cursor_shape = 2
-texture_normal = ExtResource("2_uk14x")
-texture_pressed = ExtResource("3_31p0m")
-texture_hover = ExtResource("4_dfwnd")
+texture_normal = ExtResource("3_d6rax")
+texture_pressed = ExtResource("4_osh46")
+texture_hover = ExtResource("5_lkfpa")
 ignore_texture_size = true
 stretch_mode = 5
 

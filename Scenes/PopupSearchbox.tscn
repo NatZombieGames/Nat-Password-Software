@@ -3,9 +3,9 @@
 [ext_resource type="StyleBox" uid="uid://jvc6ydncn2dh" path="res://Other/AppBodyPanelStylebox.tres" id="1_4i1d5"]
 [ext_resource type="Script" path="res://Scripts/PopupSearchbox.gd" id="1_g5vuo"]
 [ext_resource type="PackedScene" uid="uid://bsncq4qay0aqo" path="res://Scenes/SearchElement.tscn" id="2_7av6t"]
-[ext_resource type="Texture2D" uid="uid://bb33vcvjgbovs" path="res://Assets/RemoveIcon.png" id="2_rdmoo"]
-[ext_resource type="Texture2D" uid="uid://m8aj56bksd32" path="res://Assets/RemoveIcon_Pressed.png" id="3_rpqtf"]
-[ext_resource type="Texture2D" uid="uid://bx5u42o4cykec" path="res://Assets/RemoveIcon_Hovered.png" id="4_thjbi"]
+[ext_resource type="Texture2D" uid="uid://h6jmxplpaaoo" path="res://Assets/QuitIcon.png" id="4_b2wqk"]
+[ext_resource type="Texture2D" uid="uid://bpsu46emcej1p" path="res://Assets/QuitIcon_Pressed.png" id="5_1d0sy"]
+[ext_resource type="Texture2D" uid="uid://cmfl8j461s3sd" path="res://Assets/QuitIcon_Hovered.png" id="6_4rs45"]
 
 [node name="PopupSearchbox" type="PanelContainer"]
 custom_minimum_size = Vector2(1440, 810)
@@ -36,9 +36,9 @@ custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 0
-texture_normal = ExtResource("2_rdmoo")
-texture_pressed = ExtResource("3_rpqtf")
-texture_hover = ExtResource("4_thjbi")
+texture_normal = ExtResource("4_b2wqk")
+texture_pressed = ExtResource("5_1d0sy")
+texture_hover = ExtResource("6_4rs45")
 ignore_texture_size = true
 stretch_mode = 5
 
