@@ -42,9 +42,12 @@ func read_data() -> void:
 	var passwords_data_exists : bool = (data_exists == true and FileAccess.file_exists(passwords_path))
 	var tags_data_exists : bool = (data_exists == true and FileAccess.file_exists(tag_path))
 	var run_decryption_process : bool = user_data["encryption"] == true and (passwords_data_exists and tags_data_exists)
-	var empty_files : Array[bool]
+	var empty_files : Array[bool] = [false, false]
 	if data_exists:
-		empty_files = [len(FileAccess.open(passwords_path, FileAccess.READ).get_as_text()) < 1, len(FileAccess.open(tag_path, FileAccess.READ).get_as_text()) < 1]
+		if passwords_data_exists:
+			empty_files[0] = len(FileAccess.open(passwords_path, FileAccess.READ).get_as_text()) < 1
+		if tags_data_exists:
+			empty_files[1] = len(FileAccess.open(tag_path, FileAccess.READ).get_as_text()) < 1
 	main.callv("set_decryption_screen", [run_decryption_process])
 	if run_decryption_process:
 		while succesfully_read_data == false:
@@ -127,7 +130,7 @@ func save_data(save_folder : String = "NPS_Data") -> void:
 	DisplayServer.cursor_set_shape(DisplayServer.CURSOR_ARROW)
 	return
 
-func delete_data(types : Array[String]) -> void:
+func delete_data(types : Array) -> void:
 	pause_app(true)
 	for item in types:
 		if FileAccess.file_exists(app_path + "/NPS_Data/" + item + ".ini"):

@@ -219,20 +219,6 @@ func receive_add_entry_pressed(id : int) -> void:
 		set_infopanel()
 		await frame_pause()
 		get_node(str(["%Passwords", "%Tags"][main_page] + "/Panel/Container/InfoPanel")).callv("change_edit_mode", [0, true])
-		#if main_page == 0:
-		#	DataManager.passwords_data.append({"name": ("NewPasswordEntry" + random_numbers(10)), "login": "Login", "password": "Password", "tags": []})
-		#	active_data = DataManager.passwords_data[-1]
-		#	active_data["index"] = len(DataManager.passwords_data)-1
-		#	set_infopanel()
-		#	await frame_pause()
-		#	%Passwords/Panel/Container/InfoPanel.callv("change_edit_mode", [0, true])
-		#elif main_page == 1:
-		#	DataManager.tag_data.append({"name": ("NewTag" + random_numbers(10)), "used_by": []})
-		#	active_data = DataManager.tag_data[-1]
-		#	active_data["index"] = len(DataManager.tag_data)-1
-		#	set_infopanel()
-		#	await frame_pause()
-		#	%Tags/Panel/Container/InfoPanel.callv("change_edit_mode", [0, true])
 	elif id == -2:
 		[%Passwords/Panel/Container/InfoPanel, %Tags/Panel/Container/InfoPanel][main_page].call_deferred("create_popup_searchbox")
 	else:
@@ -242,11 +228,18 @@ func receive_add_entry_pressed(id : int) -> void:
 	return
 
 func receive_add_entry_remove_pressed(id : int) -> void:
-	for item in DataManager.tag_data:
-		if item["name"] == active_data["tags"][id]:
-			item["used_by"].pop_at(item["used_by"].find(active_data["name"]))
-	active_data["tags"].pop_at(id)
-	DataManager.passwords_data[active_data["index"]]["tags"] = active_data["tags"]
+	if main_page == 0:
+		for item in DataManager.tag_data:
+			if item["name"] == active_data["tags"][id]:
+				item["used_by"].pop_at(item["used_by"].find(active_data["name"]))
+		active_data["tags"].pop_at(id)
+		DataManager.passwords_data[active_data["index"]]["tags"] = active_data["tags"]
+	elif main_page == 1:
+		for item in DataManager.passwords_data:
+			if item["name"] == active_data["used_by"][id]:
+				item["tags"].pop_at(item["tags"].find(active_data["name"]))
+		active_data["used_by"].pop_at(id)
+		DataManager.tag_data[active_data["index"]]["used_by"] = active_data["used_by"]
 	return
 
 func handle_entry_actions(id : int) -> void:

@@ -174,12 +174,10 @@ func receive_edit_buttons(button_type : int, id : int) -> void:
 	return
 
 func receive_popup_searchbox_data(popup_data : Dictionary) -> void:
-	var data_set_1 : String = ["tags", "used_by"][type]
-	var data_set_2 : String = ["used_by", "tags"][type]
-	if popup_data["name"] not in active_data[data_set_1]:
-		active_data[data_set_1].append(popup_data["name"])
-		DataManager.passwords_data[active_data["index"]][data_set_1].append(popup_data["name"])
-		DataManager.tag_data[popup_data["index"]][data_set_2].append(active_data["name"])
+	if not popup_data["name"] in active_data[["tags", "used_by"][type]]:
+		active_data[["tags", "used_by"][type]].append(popup_data["name"])
+		DataManager.passwords_data[popup_data["index"]]["tags"].append([popup_data["name"], active_data["name"]][type])
+		DataManager.tag_data[active_data["index"]]["used_by"].append([active_data["name"], popup_data["name"]][type])
 	populate_tag_list()
 	return
 

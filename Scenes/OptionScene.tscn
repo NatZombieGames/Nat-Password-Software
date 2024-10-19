@@ -138,6 +138,7 @@ caret_blink_interval = 0.5
 unique_name_in_owner = true
 visible = false
 layout_mode = 2
+mouse_default_cursor_shape = 2
 theme_override_styles/focus = SubResource("StyleBoxEmpty_3xrn8")
 theme_override_styles/hover = ExtResource("3_kuh74")
 theme_override_styles/pressed = ExtResource("4_eck1j")
