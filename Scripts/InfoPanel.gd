@@ -7,6 +7,8 @@ extends PanelContainer
 @onready var main : Control = get_node("/root/Main")
 @onready var main_popup_container : Control = get_node("/root/Main/Camera/ScreenContainer/PopupContainer")
 @onready var main_notification_container : Control = get_node("/root/Main/Camera/ScreenContainer/NotificationContainer")
+@onready var main_password_searchbox : PanelContainer = get_node("/root/Main/Camera/ScreenContainer/MasterContainer/AppBody/Passwords/Panel/Container/SearchElement")
+@onready var main_tag_searchbox : PanelContainer = get_node("/root/Main/Camera/ScreenContainer/MasterContainer/AppBody/Tags/Panel/Container/SearchElement")
 @export_enum("Password", "Tag") var type : int = 0
 const banned_item_names : Array[String] = ["@all"]
 const banned_item_name_starters : Array[String] = ["#", "£", "&"]
@@ -90,7 +92,24 @@ func receive_optionscene_pressed(id : int, state : bool) -> void:
 	return
 
 func handle_entry_actions(id : int) -> void:
-	main.call_deferred("handle_entry_actions", id)
+	if id == 0:
+		if type == 0:
+			DataManager.passwords_data.pop_at(active_data["index"])
+			for item in DataManager.tag_data:
+				if active_data["name"] in item["used_by"]:
+					var to_set : Array = item["used_by"]
+					to_set.erase(active_data["name"])
+					DataManager.tag_data[DataManager.tag_data.find(item)]["used_by"] = to_set
+		elif type == 1:
+			DataManager.tag_data.pop_at(active_data["index"])
+			for item in DataManager.passwords_data:
+				if active_data["name"] in item["tags"]:
+					var to_set : Array = item["tags"]
+					to_set.erase(active_data["name"])
+					DataManager.passwords_data[DataManager.passwords_data.find(item)]["tags"] = to_set
+		$".".set_deferred("visible", false)
+		[main_password_searchbox, main_tag_searchbox][type].get_child(0).get_child(0).set_deferred("text", "")
+		[main_password_searchbox, main_tag_searchbox][type].call_deferred("searchbox_text_changed", "")
 	return
 
 func create_popup_searchbox() -> void:

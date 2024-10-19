@@ -242,26 +242,6 @@ func receive_add_entry_remove_pressed(id : int) -> void:
 		DataManager.tag_data[active_data["index"]]["used_by"] = active_data["used_by"]
 	return
 
-func handle_entry_actions(id : int) -> void:
-	if main_page == 0:
-		var password_name : String = DataManager.passwords_data[id]["name"]
-		for item in DataManager.tag_data:
-			if password_name in item["used_by"]:
-				item["used_by"].pop_at(item["used_by"].find(password_name))
-		DataManager.passwords_data.pop_at(id)
-		%Passwords/Panel/Container/SearchElement/Container/SearchBox.set_deferred("text", "")
-		%Passwords/Panel/Container/SearchElement.call_deferred("searchbox_text_changed", "")
-	elif main_page == 1:
-		var tag_name : String = DataManager.tag_data[id]["name"]
-		for item in DataManager.passwords_data:
-			if tag_name in item["tags"]:
-				item["tags"].pop_at(item["tags"].find(tag_name))
-		DataManager.tag_data.pop_at(id)
-		%Tags/Panel/Container/SearchElement/Container/SearchBox.set_deferred("text", "")
-		%Tags/Panel/Container/SearchElement.call_deferred("searchbox_text_changed", "")
-	set_infopanel(false)
-	return
-
 func random_numbers(length : int) -> String:
 	var to_return : String = ""
 	var numbers : Array[String] = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]

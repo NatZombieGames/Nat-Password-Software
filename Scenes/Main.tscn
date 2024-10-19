@@ -18,9 +18,9 @@
 [ext_resource type="PackedScene" uid="uid://swr8nsy32e14" path="res://Scenes/PageContent.tscn" id="15_ys48v"]
 [ext_resource type="PackedScene" uid="uid://buy2fhx7cw5wv" path="res://Scenes/DataDecryptionPopup.tscn" id="17_hbhgp"]
 
-[sub_resource type="ButtonGroup" id="ButtonGroup_vb3lg"]
+[sub_resource type="ButtonGroup" id="ButtonGroup_qi52v"]
 
-[sub_resource type="ButtonGroup" id="ButtonGroup_cb7ol"]
+[sub_resource type="ButtonGroup" id="ButtonGroup_qota7"]
 allow_unpress = true
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_epeum"]
@@ -35,7 +35,7 @@ corner_radius_top_right = 15
 corner_radius_bottom_right = 15
 corner_radius_bottom_left = 15
 
-[sub_resource type="ButtonGroup" id="ButtonGroup_vhq1b"]
+[sub_resource type="ButtonGroup" id="ButtonGroup_rcbfl"]
 
 [sub_resource type="Animation" id="Animation_cs1ou"]
 length = 0.001
@@ -174,7 +174,7 @@ color = Color(0.196078, 0.196078, 0.196078, 1)
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 size_flags_vertical = 1
-button_group = SubResource("ButtonGroup_vb3lg")
+button_group = SubResource("ButtonGroup_qi52v")
 is_self_visible = 1
 type = 1
 buttons = Array[String](["Passwords", "Tags", "App Settings", "Help"])
@@ -300,7 +300,7 @@ theme_override_constants/separation = 35
 [node name="PageSelector" parent="Camera/ScreenContainer/MasterContainer/AppBody/AppSettings/Container/Container" instance=ExtResource("12_6yc3s")]
 custom_minimum_size = Vector2(275, 0)
 layout_mode = 2
-button_group = SubResource("ButtonGroup_cb7ol")
+button_group = SubResource("ButtonGroup_qota7")
 selector_id = 1
 buttons = Array[String](["General", "Data", "Search"])
 
@@ -444,7 +444,7 @@ theme_override_constants/separation = 35
 [node name="PageSelector" parent="Camera/ScreenContainer/MasterContainer/AppBody/Help/Container/Container" instance=ExtResource("12_6yc3s")]
 custom_minimum_size = Vector2(275, 0)
 layout_mode = 2
-button_group = SubResource("ButtonGroup_vhq1b")
+button_group = SubResource("ButtonGroup_rcbfl")
 selector_id = 2
 buttons = Array[String](["Passwords", "Tags", "Data", "App", "Search", "Developer"])
 
