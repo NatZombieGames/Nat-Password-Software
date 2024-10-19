@@ -2,15 +2,11 @@ extends PanelContainer
 
 signal set_decryption_key
 
-func pause(time : float = 0.25) -> void:
-	%Timer.start(time)
-	await %Timer.timeout
-	return
-
 func show_error(text : String) -> void:
 	%ErrorLabel.text = text
 	%ErrorLabel.set_deferred("visible", true)
-	await pause(3)
+	%Timer.start(3)
+	await %Timer.timeout
 	%ErrorLabel.set_deferred("visible", false)
 	return
 

@@ -36,7 +36,6 @@ func search(query : String) -> void:
 	var search_data : Array = []
 	var data_set : Array[Dictionary] = [DataManager.passwords_data.duplicate(true), DataManager.tag_data.duplicate(true)][type]
 	var item_set : String = "name"
-	var special_search : bool = false
 	var strict_search : bool = DataManager.user_data["strict_search"]
 	if not DataManager.user_data["case_sensative_search"]:
 		query = query.to_lower()
@@ -53,7 +52,6 @@ func search(query : String) -> void:
 		if query == "@all":
 			search_data = range(0, len(data_set))
 	elif query[0] in search_prefix_types:
-		special_search = true
 		if query[0] == "#":
 			item_set = ["tags", "used_by"][type]
 		elif type == 0:
@@ -61,7 +59,6 @@ func search(query : String) -> void:
 				item_set = "login"
 			elif query[0] == "£":
 				item_set = "password"
-	if special_search:
 		query = query.substr(1, -1)
 	%SearchResultsCounter.set_deferred("text", "Searching, Going Through Data...")
 	await frame_pause()
