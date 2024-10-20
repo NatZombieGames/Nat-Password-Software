@@ -1,6 +1,6 @@
 - Welcome To The Nat Password Software! -
 
-If you are here to use the end project, and not interact with the developer/coding side, then look into the 'ExportedProject' folder to pick from either the Web, Linux or Windows builds. If you want to look at the legal information, please see the LICENSE.txt file. If you want to interact with the developer side of the project, then see below (Below is the same as the Help > Developer section of the app).
+If you are here to use the end project, and not interact with the developer/coding side, then look into the 'ExportedProject' folder to pick from either the Linux or Windows builds. If you want to look at the legal information, please see the LICENSE.txt file. If you want to interact with the developer side of the project, then see below (Below is the same as the Help > Developer section of the app).
 
 - - - - -
 This app is open-source, therefor the project files for this programme are freely available for you to modify and redistribute.
