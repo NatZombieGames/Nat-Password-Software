@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://cell0g8qd8kay"]
 
-[ext_resource type="Script" path="res://Scripts/PopupScene.gd" id="1_nfoj0"]
+[ext_resource type="Script" uid="uid://dbq5qsnhbmsw8" path="res://Scripts/PopupScene.gd" id="1_nfoj0"]
 [ext_resource type="StyleBox" uid="uid://5gp6u2fdw2a0" path="res://Other/PopupSceneStylebox.tres" id="1_vaiq0"]
 
 [node name="PopupScene" type="PanelContainer"]

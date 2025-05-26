@@ -12,11 +12,11 @@ config_version=5
 
 config/name="Nat Password Software"
 config/description="Open-Source (CC1.0) Password Managment Software"
-config/version="1.2"
+config/version="1.2.1"
 run/main_scene="res://Scenes/Main.tscn"
-config/features=PackedStringArray("4.3", "GL Compatibility")
+config/features=PackedStringArray("4.4", "GL Compatibility")
 boot_splash/show_image=false
-config/icon="res://Assets/SoftwareLogoCircle_1.ico"
+config/icon="uid://hq5848tbf2fa"
 config/windows_native_icon="res://Assets/SoftwareLogoCircle_1.ico"
 
 [autoload]
@@ -96,6 +96,5 @@ Back={
 
 [rendering]
 
-renderer/rendering_method="gl_compatibility"
-renderer/rendering_method.mobile="gl_compatibility"
+renderer/rendering_method="mobile"
 textures/vram_compression/import_etc2_astc=true

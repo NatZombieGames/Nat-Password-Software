@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://beq806bwpyrs2"]
 
-[ext_resource type="Script" path="res://Scripts/DataManager.gd" id="1_wytxs"]
+[ext_resource type="Script" uid="uid://ctccsn6a3ee7a" path="res://Scripts/DataManager.gd" id="1_wytxs"]
 
 [node name="DataManager" type="Node"]
 process_mode = 3

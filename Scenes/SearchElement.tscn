@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://bsncq4qay0aqo"]
 
 [ext_resource type="StyleBox" uid="uid://c1tkt82c3mker" path="res://Other/SearchElementStylebox.tres" id="1_ap5om"]
-[ext_resource type="Script" path="res://Scripts/SearchElement.gd" id="1_gwp3p"]
+[ext_resource type="Script" uid="uid://ck11pgp6xocwu" path="res://Scripts/SearchElement.gd" id="1_gwp3p"]
 [ext_resource type="PackedScene" uid="uid://cjr3qgwjg1kys" path="res://Scenes/AddEntryBtn.tscn" id="2_1hn7d"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nnqij"]

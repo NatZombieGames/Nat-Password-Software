@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://dv8l1vn5xuvuh"]
 
-[ext_resource type="Script" path="res://Scripts/NotificationScene.gd" id="1_5rjos"]
+[ext_resource type="Script" uid="uid://beevgusp1saqm" path="res://Scripts/NotificationScene.gd" id="1_5rjos"]
 [ext_resource type="StyleBox" uid="uid://bwqg3l3i7fp2l" path="res://Other/NotificationSceneStylebox.tres" id="1_kdmp7"]
 
 [node name="NotificationScene" type="PanelContainer"]

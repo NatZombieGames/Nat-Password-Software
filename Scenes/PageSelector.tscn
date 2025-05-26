@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://dd4na1exlprsc"]
 
 [ext_resource type="StyleBox" uid="uid://44k253vkxhf1" path="res://Other/PageSelectorStylebox.tres" id="1_igd8k"]
-[ext_resource type="Script" path="res://Scripts/PageSelector.gd" id="1_ju8b4"]
+[ext_resource type="Script" uid="uid://c1ekrq6rxjl27" path="res://Scripts/PageSelector.gd" id="1_ju8b4"]
 
 [node name="PageSelector" type="PanelContainer"]
 size_flags_vertical = 3

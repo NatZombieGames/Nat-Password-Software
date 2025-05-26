@@ -1,6 +1,6 @@
 [gd_scene load_steps=25 format=3 uid="uid://bam4ff3h0tn3h"]
 
-[ext_resource type="Script" path="res://Scripts/Main.gd" id="1_6hid6"]
+[ext_resource type="Script" uid="uid://4v2sgnbuihrb" path="res://Scripts/Main.gd" id="1_6hid6"]
 [ext_resource type="Texture2D" uid="uid://hq5848tbf2fa" path="res://Assets/SoftwareLogoCircle_1.png" id="1_sw0tc"]
 [ext_resource type="Texture2D" uid="uid://eyopq06g7dre" path="res://Assets/MinimizeIcon.png" id="2_2dwtu"]
 [ext_resource type="Texture2D" uid="uid://b3g2gm1bs7nyp" path="res://Assets/MinimizeIcon_Pressed.png" id="3_yoeou"]
@@ -18,9 +18,9 @@
 [ext_resource type="PackedScene" uid="uid://swr8nsy32e14" path="res://Scenes/PageContent.tscn" id="15_ys48v"]
 [ext_resource type="PackedScene" uid="uid://buy2fhx7cw5wv" path="res://Scenes/DataDecryptionPopup.tscn" id="17_hbhgp"]
 
-[sub_resource type="ButtonGroup" id="ButtonGroup_qi52v"]
+[sub_resource type="ButtonGroup" id="ButtonGroup_2w5on"]
 
-[sub_resource type="ButtonGroup" id="ButtonGroup_qota7"]
+[sub_resource type="ButtonGroup" id="ButtonGroup_346fj"]
 allow_unpress = true
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_epeum"]
@@ -35,7 +35,7 @@ corner_radius_top_right = 15
 corner_radius_bottom_right = 15
 corner_radius_bottom_left = 15
 
-[sub_resource type="ButtonGroup" id="ButtonGroup_rcbfl"]
+[sub_resource type="ButtonGroup" id="ButtonGroup_0sclb"]
 
 [sub_resource type="Animation" id="Animation_cs1ou"]
 length = 0.001
@@ -70,8 +70,8 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_kctgn"]
 _data = {
-"RESET": SubResource("Animation_cs1ou"),
-"fadeout": SubResource("Animation_ar5tu")
+&"RESET": SubResource("Animation_cs1ou"),
+&"fadeout": SubResource("Animation_ar5tu")
 }
 
 [node name="Main" type="Control"]
@@ -174,7 +174,7 @@ color = Color(0.196078, 0.196078, 0.196078, 1)
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 size_flags_vertical = 1
-button_group = SubResource("ButtonGroup_qi52v")
+button_group = SubResource("ButtonGroup_2w5on")
 is_self_visible = 1
 type = 1
 buttons = Array[String](["Passwords", "Tags", "App Settings", "Help"])
@@ -300,7 +300,7 @@ theme_override_constants/separation = 35
 [node name="PageSelector" parent="Camera/ScreenContainer/MasterContainer/AppBody/AppSettings/Container/Container" instance=ExtResource("12_6yc3s")]
 custom_minimum_size = Vector2(275, 0)
 layout_mode = 2
-button_group = SubResource("ButtonGroup_qota7")
+button_group = SubResource("ButtonGroup_346fj")
 selector_id = 1
 buttons = Array[String](["General", "Data", "Search"])
 
@@ -444,7 +444,7 @@ theme_override_constants/separation = 35
 [node name="PageSelector" parent="Camera/ScreenContainer/MasterContainer/AppBody/Help/Container/Container" instance=ExtResource("12_6yc3s")]
 custom_minimum_size = Vector2(275, 0)
 layout_mode = 2
-button_group = SubResource("ButtonGroup_rcbfl")
+button_group = SubResource("ButtonGroup_0sclb")
 selector_id = 2
 buttons = Array[String](["Passwords", "Tags", "Data", "App", "Search", "Developer"])
 
@@ -902,7 +902,7 @@ editor_preview_indeterminate = false
 
 [node name="FadePlayer" type="AnimationPlayer" parent="Camera/ScreenContainer/LoadingScreen"]
 libraries = {
-"": SubResource("AnimationLibrary_kctgn")
+&"": SubResource("AnimationLibrary_kctgn")
 }
 
 [node name="DecryptionScreen" type="Control" parent="Camera/ScreenContainer"]

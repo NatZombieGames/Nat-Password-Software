@@ -3,7 +3,7 @@
 [ext_resource type="ButtonGroup" uid="uid://bmq58w6g3jotn" path="res://Other/MainPageBtnGroup.tres" id="1_ikkll"]
 [ext_resource type="StyleBox" uid="uid://m3wmborjsfoc" path="res://Other/PageSelectorHoveredStylebox.tres" id="1_jvkcc"]
 [ext_resource type="StyleBox" uid="uid://bjf72en1nfvkd" path="res://Other/PageSelectorPressedStylebox.tres" id="2_7btdr"]
-[ext_resource type="Script" path="res://Scripts/PageSelectorBtn.gd" id="2_ehw2l"]
+[ext_resource type="Script" uid="uid://dtpwy5lvvloov" path="res://Scripts/PageSelectorBtn.gd" id="2_ehw2l"]
 [ext_resource type="StyleBox" uid="uid://djc501j607gr8" path="res://Other/PageSelectorNormalStylebox.tres" id="3_kfajx"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_fatvq"]

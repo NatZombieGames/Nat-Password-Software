@@ -2,7 +2,7 @@
 
 [ext_resource type="ButtonGroup" uid="uid://ddh3myfjo0esy" path="res://Other/ItemSceneBtnGroup.tres" id="1_5v1ga"]
 [ext_resource type="StyleBox" uid="uid://cm3vnitjlvddu" path="res://Other/ItemSceneNormalStylebox.tres" id="1_diko6"]
-[ext_resource type="Script" path="res://Scripts/ItemScene.gd" id="1_eaj75"]
+[ext_resource type="Script" uid="uid://cevkmcvr4weii" path="res://Scripts/ItemScene.gd" id="1_eaj75"]
 
 [node name="ItemScene" type="PanelContainer"]
 custom_minimum_size = Vector2(200, 90)
